@@ -1,9 +1,10 @@
+import 'package:dentister/features/home/presentation/views/home_screen.dart';
 import 'package:dentister/features/splash_onboard/presentation/views/splash_screen.dart';
 import 'package:go_router/go_router.dart';
 
 abstract class AppRouter{
   static String kSplashScreen = "/";
-  static String kHomeScreen = "kHomeScreen";
+  static String kHomeScreen = "/kHomeScreen";
 
   static GoRouter router = GoRouter(
       routes: [
@@ -13,7 +14,7 @@ abstract class AppRouter{
         ),
         GoRoute(
             path: kHomeScreen,
-            builder: (context,state)=>const HomeScree()
+            builder: (context,state)=>const HomeScreen()
         ),
       ]
   );
