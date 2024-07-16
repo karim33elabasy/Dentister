@@ -14,7 +14,7 @@ class Dentister extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      routerConfig: AppRouter.route,
+      routerConfig: AppRouter.router,
     );
   }
 }
