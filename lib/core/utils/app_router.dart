@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:dentister/features/splash_onboard/presentation/views/splash_screen.dart';
 import 'package:go_router/go_router.dart';
 
 abstract class AppRouter{
@@ -7,8 +7,8 @@ abstract class AppRouter{
       routes: [
         GoRoute(
           path: kSplashScreen,
-          builder: (context,state)=>SplashScree
-        )
+          builder: (context,state)=>const SplashScreen()
+        ),
       ]
   );
 }
