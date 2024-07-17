@@ -1,3 +1,4 @@
+import 'package:dentister/features/patient_section/presentation/views/widgets/add_patient_body.dart';
 import 'package:dentister/features/patient_section/presentation/views/widgets/patient_appbar.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,8 @@ class AddPatientScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            PatientAppbar(title: "Add New Patient",)
+            PatientAppbar(title: "Add New Patient",),
+            AddPatientBody(),
           ],
         ),
       ),
