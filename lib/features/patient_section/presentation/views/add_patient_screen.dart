@@ -1,3 +1,4 @@
+import 'package:dentister/features/patient_section/presentation/views/widgets/patient_appbar.dart';
 import 'package:flutter/material.dart';
 
 class AddPatientScreen extends StatelessWidget {
@@ -5,6 +6,14 @@ class AddPatientScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return const Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            PatientAppbar()
+          ],
+        ),
+      ),
+    );
   }
 }
