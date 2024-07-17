@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class PatientAppbar extends StatelessWidget {
-  const PatientAppbar({super.key});
+  final String title;
+  const PatientAppbar({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -10,10 +11,13 @@ class PatientAppbar extends StatelessWidget {
     return Container(
       color: Colors.red,
       padding: EdgeInsets.symmetric(
-        horizontal: width*0.02,
+        // horizontal: width*0.02,
         vertical: height*0.005
       ),
-      child: Text(),
+      child: const ListTile(
+        leading: Icon(Icons.arrow_back_ios_rounded),
+        title: Text(title,style: TextStyle(),),
+      ),
     );
   }
 }
