@@ -11,7 +11,7 @@ class PatientAppbar extends StatelessWidget {
     double height = MediaQuery.sizeOf(context).height;
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: width*0.05,
+        horizontal: width*0.015,
         vertical: height*0.005
       ),
       child: Row(
