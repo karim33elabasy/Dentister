@@ -8,9 +8,11 @@ class AddPatientFloatingButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-        onPressed: (){
-          context.push(AppRouter.kA);
-        }
+      onPressed: (){
+        context.push(AppRouter.kAddPatientScreen);
+      },
+      backgroundColor: AppCol,
+      child: const Icon(Icons.add_rounded),
     );
 
   }
