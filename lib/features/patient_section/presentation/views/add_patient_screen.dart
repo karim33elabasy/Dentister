@@ -10,7 +10,7 @@ class AddPatientScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            PatientAppbar()
+            PatientAppbar(title: "Add New Patient",)
           ],
         ),
       ),
