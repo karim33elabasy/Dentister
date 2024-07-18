@@ -1,4 +1,3 @@
-import 'package:dentister/core/utils/app_router.dart';
 import 'package:dentister/features/patient_section/presentation/views/widgets/show_patients_appbar.dart';
 import 'package:dentister/features/patient_section/presentation/views/widgets/show_patients_body.dart';
 import 'package:flutter/material.dart';
