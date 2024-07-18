@@ -23,14 +23,15 @@ class AddPatientBody extends StatelessWidget {
           const SectionTitle(title: "Personal Information"),
           MyTff(
             obscureText: false,
-            label: "Full Name",
+            label: "Patient ID",
             controller: TextEditingController(),
             minLines: 1,
             maxLines: 1,
+            enabled: false,
           ),
           MyTff(
             obscureText: false,
-            label: "Patient ID",
+            label: "Full Name",
             controller: TextEditingController(),
             minLines: 1,
             maxLines: 1,
