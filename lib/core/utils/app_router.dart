@@ -10,12 +10,13 @@ abstract class AppRouter{
   static String kHomeScreen = "/kHomeScreen";
   static String kAddPatientScreen = "/kAddPatientScreen";
   static String kEditPatientScreen = "/kEditPatientScreen";
-  static String kShowPatientsScreen = "/kShowPatientsScreen";
+  static String kShowPatientsScreen = "/";
 
   static GoRouter router = GoRouter(
       routes: [
         GoRoute(
-          path: kSplashScreen,
+          // path: kSplashScreen,
+          path: kShowPatientsScreen,
           builder: (context,state)=>const SplashScreen()
         ),
         GoRoute(
