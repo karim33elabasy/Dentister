@@ -6,11 +6,11 @@ import 'package:dentister/features/splash_onboard/presentation/views/splash_scre
 import 'package:go_router/go_router.dart';
 
 abstract class AppRouter{
-  static String kSplashScreen = "/o";
+  static String kSplashScreen = "/";
   static String kHomeScreen = "/kHomeScreen";
   static String kAddPatientScreen = "/kAddPatientScreen";
   static String kEditPatientScreen = "/kEditPatientScreen";
-  static String kShowPatientsScreen = "/";
+  static String kShowPatientsScreen = "/kShowPatientsScreen";
 
   static GoRouter router = GoRouter(
       routes: [
