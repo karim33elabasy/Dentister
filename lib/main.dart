@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 
 main(){
   runApp(
-    DevicePreview(builder: (context)=>const Dentister())
+    DevicePreview(
+      enabled: true,
+      builder: (context)=>const Dentister()
+    )
   );
 }
 

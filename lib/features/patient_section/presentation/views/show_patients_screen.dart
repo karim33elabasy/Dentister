@@ -1,3 +1,6 @@
+import 'package:dentister/core/utils/app_router.dart';
+import 'package:dentister/features/patient_section/presentation/views/widgets/show_patients_appbar.dart';
+import 'package:dentister/features/patient_section/presentation/views/widgets/show_patients_body.dart';
 import 'package:flutter/material.dart';
 
 class ShowPatientsScreen extends StatelessWidget {
@@ -9,44 +12,13 @@ class ShowPatientsScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            ShowPatientsAppbar()
+            ShowPatientsAppbar(),
+            Expanded(
+              child: ShowPatientsBody()
+            )
           ],
         ),
       ),
     );
   }
 }
-class ShowPatientsAppbar extends StatelessWidget {
-  const ShowPatientsAppbar({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    double width = MediaQuery.sizeOf(context).width;
-    double height = MediaQuery.sizeOf(context).height;
-    return Container(
-        padding: EdgeInsets.symmetric(
-            horizontal: width*0.015,
-            vertical: height*0.005
-        ),
-        child: Row(
-          children: [
-            IconButton(
-                onPressed: (){
-                },
-                icon: Icon(Icons.arrow_back_ios_rounded,size: width*0.04,)
-            ),
-            SizedBox(width: width*0.01,),
-            Text(
-                "title",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w600,
-                    fontSize: width*0.05
-                )
-            ),
-          ],
-        )
-    );
-  }
-}
-

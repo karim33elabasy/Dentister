@@ -1,14 +1,16 @@
 class PersonalInformation {
-  String fullName;
-  String patientID;
-  DateTime dateOfBirth;
-  String gender;
+  final String fullName;
+  final String patientID;
+  final DateTime dateOfBirth;
+  final String gender;
+  final bool current;
 
-  PersonalInformation({
+  const PersonalInformation({
     required this.fullName,
     required this.patientID,
     required this.dateOfBirth,
     required this.gender,
+    required this.current
   });
 
   Map<String, dynamic> toJson() => {
@@ -16,6 +18,7 @@ class PersonalInformation {
     'patientID': patientID,
     'dateOfBirth': dateOfBirth.toIso8601String(),
     'gender': gender,
+    'current': current
   };
 
   factory PersonalInformation.fromJson(Map<String, dynamic> json) => PersonalInformation(
@@ -23,5 +26,6 @@ class PersonalInformation {
     patientID: json['patientID'],
     dateOfBirth: DateTime.parse(json['dateOfBirth']),
     gender: json['gender'],
+    current: json['current'],
   );
 }

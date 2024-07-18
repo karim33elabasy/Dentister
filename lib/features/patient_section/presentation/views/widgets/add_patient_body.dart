@@ -21,6 +21,14 @@ class AddPatientBody extends StatelessWidget {
         children: [
           const PatientAvatarAddScreen(),
           const SectionTitle(title: "Personal Information"),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Current Patient ?",style: TextStyle(fontSize: width*0.04),),
+              Switch(value: true, onChanged: (value){})
+            ],
+          ),
+          SizedBox(height: width*0.05,),
           MyTff(
             obscureText: false,
             label: "Patient ID",

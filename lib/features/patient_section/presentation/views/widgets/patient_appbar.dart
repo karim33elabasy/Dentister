@@ -20,7 +20,7 @@ class PatientAppbar extends StatelessWidget {
             onPressed: (){
               context.pop();
             },
-            icon: Icon(Icons.arrow_back_ios_rounded,size: width*0.04,)
+            icon: Icon(Icons.arrow_back_ios_rounded,size: width*0.05,)
           ),
           SizedBox(width: width*0.01,),
           Text(
