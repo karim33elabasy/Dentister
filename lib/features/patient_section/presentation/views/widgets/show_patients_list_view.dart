@@ -6,8 +6,10 @@ class ShowPatientsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return ListView.separated(
+      separatorBuilder: (context,counter)=>SizedBox(height: MediaQuery.sizeOf(context).width*0.03,),
       itemBuilder: (context,counter)=>const ShowPatientWidget(),
+      itemCount: 5,
     );
   }
 }

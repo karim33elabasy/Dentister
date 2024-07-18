@@ -11,8 +11,8 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       floatingActionButton: const AddPatientFloatingButton(),
       body: Center(child: InkWell(
-        onTap: (){context.go(AppRouter.kShowPatientsScreen);},
-        child: Text("Go to show patient screen"),)
+        onTap: (){context.push(AppRouter.kShowPatientsScreen);},
+        child: const Text("Go to show patient screen"),)
       )
     );
   }
