@@ -21,14 +21,6 @@ class AddPatientBody extends StatelessWidget {
         children: [
           const PatientAvatarAddScreen(),
           const SectionTitle(title: "Personal Information"),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("Current Patient ?",style: TextStyle(fontSize: width*0.04),),
-              Switch(value: true, onChanged: (value){})
-            ],
-          ),
-          SizedBox(height: width*0.05,),
           MyTff(
             obscureText: false,
             label: "Patient ID",
@@ -37,195 +29,20 @@ class AddPatientBody extends StatelessWidget {
             maxLines: 1,
             enabled: false,
           ),
-          MyTff(
-            obscureText: false,
-            label: "Full Name",
-            controller: TextEditingController(),
-            minLines: 1,
-            maxLines: 1,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Current Patient ?",style: TextStyle(fontSize: width*0.04),),
+              Switch(value: true, onChanged: (value){})
+            ],
           ),
-          MyTff(
-            obscureText: false,
-            label: "Date of Birth",
-            controller: TextEditingController(),
-            minLines: 1,
-            maxLines: 1,
-          ),
-          MyTff(
-            obscureText: false,
-            label: "Gender",
-            controller: TextEditingController(),
-            minLines: 1,
-            maxLines: 1,
-          ),
-
-          const SectionTitle(title: "Contact Information"),
-          MyTff(
-            obscureText: false,
-            label: "Phone Number",
-            controller: TextEditingController(),
-            minLines: 1,
-            maxLines: 1,
-          ),
-          MyTff(
-            obscureText: false,
-            label: "Email Address",
-            controller: TextEditingController(),
-            minLines: 1,
-            maxLines: 1,
-          ),
-          MyTff(
-            obscureText: false,
-            label: "Physical Address",
-            controller: TextEditingController(),
-            minLines: 1,
-            maxLines: 3,
-          ),
-
-          const SectionTitle(title: "Medical History"),
-          MyTff(
-            obscureText: false,
-            label: "Medical Conditions",
-            controller: TextEditingController(),
-            minLines: 1,
-            maxLines: 3,
-          ),
-          MyTff(
-            obscureText: false,
-            label: "Current Medications",
-            controller: TextEditingController(),
-            minLines: 1,
-            maxLines: 3,
-          ),
-          MyTff(
-            obscureText: false,
-            label: "Family Medical History",
-            controller: TextEditingController(),
-            minLines: 1,
-            maxLines: 3,
-          ),
-          MyTff(
-            obscureText: false,
-            label: "Allergies",
-            controller: TextEditingController(),
-            minLines: 1,
-            maxLines: 3,
-          ),
-
-          const SectionTitle(title: "Dental History"),
-          MyTff(
-            obscureText: false,
-            label: "Previous Dental Treatments",
-            controller: TextEditingController(),
-            minLines: 1,
-            maxLines: 3,
-          ),
-          MyTff(
-            obscureText: false,
-            label: "Dental Conditions",
-            controller: TextEditingController(),
-            minLines: 1,
-            maxLines: 3,
-          ),
-          MyTff(
-            obscureText: false,
-            label: "Previous X-rays and Imaging",
-            controller: TextEditingController(),
-            minLines: 1,
-            maxLines: 3,
-          ),
-
-          const SectionTitle(title: "Appointment Records"),
-          MyTff(
-            obscureText: false,
-            label: "Appointment Dates",
-            controller: TextEditingController(),
-            minLines: 1,
-            maxLines: 3,
-          ),
-          MyTff(
-            obscureText: false,
-            label: "Visit Notes",
-            controller: TextEditingController(),
-            minLines: 1,
-            maxLines: 3,
-          ),
-          MyTff(
-            obscureText: false,
-            label: "Treatment Plans",
-            controller: TextEditingController(),
-            minLines: 1,
-            maxLines: 3,
-          ),
-          MyTff(
-            obscureText: false,
-            label: "Procedure Details",
-            controller: TextEditingController(),
-            minLines: 1,
-            maxLines: 3,
-          ),
-
-          const SectionTitle(title: "Diagnostic Records"),
-          MyTff(
-            obscureText: false,
-            label: "X-rays",
-            controller: TextEditingController(),
-            minLines: 1,
-            maxLines: 3,
-          ),
-          MyTff(
-            obscureText: false,
-            label: "Photographs",
-            controller: TextEditingController(),
-            minLines: 1,
-            maxLines: 3,
-          ),
-          MyTff(
-            obscureText: false,
-            label: "Lab Test Results",
-            controller: TextEditingController(),
-            minLines: 1,
-            maxLines: 3,
-          ),
-
-          const SectionTitle(title: "Financial Records"),
-          MyTff(
-            obscureText: false,
-            label: "Invoices",
-            controller: TextEditingController(),
-            minLines: 1,
-            maxLines: 3,
-          ),
-          MyTff(
-            obscureText: false,
-            label: "Payment History",
-            controller: TextEditingController(),
-            minLines: 1,
-            maxLines: 3,
-          ),
-          MyTff(
-            obscureText: false,
-            label: "Insurance Information",
-            controller: TextEditingController(),
-            minLines: 1,
-            maxLines: 3,
-          ),
-
-          const SectionTitle(title: "Communication Records"),
-          MyTff(
-            obscureText: false,
-            label: "Messages",
-            controller: TextEditingController(),
-            minLines: 1,
-            maxLines: 3,
-          ),
-          MyTff(
-            obscureText: false,
-            label: "Appointment Reminders",
-            controller: TextEditingController(),
-            minLines: 1,
-            maxLines: 3,
-          ),
+          SizedBox(height: width*0.05,),
+          TabBarView(
+              children: [
+            Container(height: 60,width: 60,color: Colors.yellow,),
+            Container(height: 60,width: 60,color: Colors.red,),
+            Container(height: 60,width: 60,color: Colors.green,),
+          ])
         ],
       ),
     );

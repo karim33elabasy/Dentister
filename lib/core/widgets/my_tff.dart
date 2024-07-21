@@ -8,7 +8,8 @@ class MyTff extends StatelessWidget {
   final int minLines;
   final double? bottomPadding;
   final bool? enabled;
-  const MyTff({super.key, required this.obscureText, required this.label, required this.controller, required this.maxLines, required this.minLines, this.bottomPadding, this.enabled});
+  final void Function()? onTap;
+  const MyTff({super.key, required this.obscureText, required this.label, required this.controller, required this.maxLines, required this.minLines, this.bottomPadding, this.enabled, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +18,7 @@ class MyTff extends StatelessWidget {
         bottom: bottomPadding ?? MediaQuery.sizeOf(context).width*0.05
       ),
       child: TextFormField(
+        onTap: onTap,
         enabled: enabled,
         minLines: minLines,
         maxLines: maxLines,
