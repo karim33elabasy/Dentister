@@ -8,7 +8,8 @@ class PatientCubit extends Cubit<PatientStates>{
   TextEditingController id = TextEditingController();
   TextEditingController name = TextEditingController();
   TextEditingController birth = TextEditingController();
-  TextEditingController gender = TextEditingController();
+  DateTime? birthDateTime;
+  String? gender;
   TextEditingController phone = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController address = TextEditingController();

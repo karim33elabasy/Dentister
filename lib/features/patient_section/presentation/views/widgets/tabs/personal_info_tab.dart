@@ -1,9 +1,10 @@
-import 'package:dentister/core/utils/app_colors.dart';
+import 'package:dentister/features/patient_section/presentation/manager/patient_cubit.dart';
 import 'package:flutter/material.dart';
 import '../../../../../../core/widgets/my_tff.dart';
 
 class PersonalInfoTab extends StatelessWidget {
-  const PersonalInfoTab({super.key});
+  final PatientCubit cubit;
+  const PersonalInfoTab({super.key, required this.cubit});
 
   @override
 
@@ -24,7 +25,7 @@ class PersonalInfoTab extends StatelessWidget {
           MyTff(
             obscureText: false,
             label: "Patient ID",
-            controller: TextEditingController(),
+            controller: cubit.id,
             minLines: 1,
             maxLines: 1,
             enabled: false,
@@ -32,18 +33,22 @@ class PersonalInfoTab extends StatelessWidget {
           MyTff(
             obscureText: false,
             label: "Full Name",
-            controller: TextEditingController(),
+            controller: cubit.name,
             minLines: 1,
             maxLines: 1,
           ),
           MyTff(
             obscureText: false,
             label: "Date of Birth",
-            controller: TextEditingController(),
+            controller: cubit.birth,
             minLines: 1,
             maxLines: 1,
-            onTap: (){
-              showDatePicker(context: context, firstDate: DateTime(1900), lastDate: DateTime.now());
+            onTap: ()async{
+              cubit.birthDateTime = await showDatePicker(context: context, firstDate: DateTime(1900), lastDate: DateTime.now());
+              if (cubit.birthDateTime != null){
+                cubit.birth.text =
+                "${cubit.birthDateTime!.day}/${cubit.birthDateTime!.month}/${cubit.birthDateTime!.year}";
+              }
             },
           ),
           DropdownButtonFormField<String>(
@@ -54,13 +59,15 @@ class PersonalInfoTab extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
-            value: null,
+            value: cubit.gender,
       
             items: const [
               DropdownMenuItem(child: Text("Male"), value: "male"),
               DropdownMenuItem(child: Text("Female"), value: "female"),
             ],
-            onChanged: (String? value) {},
+            onChanged: (value) {
+              cubit.gender=value;
+            },
           ),
           SizedBox(height: MediaQuery.sizeOf(context).width*0.05,),
         ],

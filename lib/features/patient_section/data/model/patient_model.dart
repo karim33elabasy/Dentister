@@ -1,21 +1,59 @@
-class PatientModel{
-  final int id;
-  final String name;
-  final String birth;
-  final String gender;
-  final String phone;
-  final String? email;
-  final String? address;
-  final String? medicalCondition;
-  final String? currentMedication;
-  final String? familyMedicalHistory;
-  final String? allergies;
-  final String? previousDentalttt;
-  final String? dentalConditions;
-  final String? previousXrays;
-  final String? xrays;
-  final String? photographs;
-  final String? labTest;
+import 'package:dentister/features/patient_section/data/model/history_model.dart';
 
-  PatientModel({required this.id, required this.name, required this.birth, required this.gender, required this.phone, required this.email, required this.address, required this.medicalCondition, required this.currentMedication, required this.familyMedicalHistory, required this.allergies, required this.previousDentalttt, required this.dentalConditions, required this.previousXrays, required this.xrays, required this.photographs, required this.labTest});
+class PatientModel {
+  int? id;
+  String name;
+  String gender;
+  DateTime? dateBirth;
+  String? phone;
+  String? email;
+  String? address;
+  String? notes;
+  HistoryModel history;
+
+  PatientModel({
+    required this.id,
+    required this.name,
+    required this.gender,
+    required this.dateBirth,
+    required this.phone,
+    required this.email,
+    required this.address,
+    required this.notes,
+    required this.history,
+  });
+
+  factory PatientModel.fromJson(Map<String, dynamic> json) {
+    return PatientModel(
+      id: json['id'],
+      name: json['name'],
+      gender: json['gender'],
+      dateBirth: json['dateBirth'] != null ? DateTime.parse(json['dateBirth']) : null,
+      phone: json['phone'],
+      email: json['email'],
+      address: json['address'],
+      notes: json['notes'],
+      history: HistoryModel.fromJson(json['history']),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'gender': gender,
+      'dateBirth': dateBirth?.toIso8601String(),
+      'phone': phone,
+      'email': email,
+      'address': address,
+      'notes': notes,
+      'history': history.toJson(),
+    };
+  }
+
+  @override
+  String toString() {
+    return 'PatientModel{id: $id, name: $name, gender: $gender, dateBirth: $dateBirth, '
+        'phone: $phone, email: $email, address: $address, notes: $notes, history: $history}';
+  }
 }

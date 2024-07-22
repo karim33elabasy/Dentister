@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-
 import '../../../../../../core/widgets/my_tff.dart';
+import '../../../manager/patient_cubit.dart';
 
 class DiagnosticsTab extends StatelessWidget {
-  const DiagnosticsTab({super.key});
+  final PatientCubit cubit;
+  const DiagnosticsTab({super.key, required this.cubit});
 
   @override
   Widget build(BuildContext context) {
@@ -14,21 +15,21 @@ class DiagnosticsTab extends StatelessWidget {
           MyTff(
             obscureText: false,
             label: "X-rays",
-            controller: TextEditingController(),
+            controller: cubit.xrays,
             minLines: 1,
             maxLines: 3,
           ),
           MyTff(
             obscureText: false,
             label: "Photographs",
-            controller: TextEditingController(),
+            controller: cubit.photographs,
             minLines: 1,
             maxLines: 3,
           ),
           MyTff(
             obscureText: false,
             label: "Lab Test Results",
-            controller: TextEditingController(),
+            controller: cubit.labTest,
             minLines: 1,
             maxLines: 3,
           ),

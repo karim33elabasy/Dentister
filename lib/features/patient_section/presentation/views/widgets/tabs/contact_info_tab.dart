@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-
 import '../../../../../../core/widgets/my_tff.dart';
-import '../section_title.dart';
+import '../../../manager/patient_cubit.dart';
 
 class ContactInfoTab extends StatelessWidget {
-  const ContactInfoTab({super.key});
+  final PatientCubit cubit;
+  const ContactInfoTab({super.key, required this.cubit});
 
   @override
   Widget build(BuildContext context) {
@@ -15,21 +15,21 @@ class ContactInfoTab extends StatelessWidget {
           MyTff(
             obscureText: false,
             label: "Phone Number",
-            controller: TextEditingController(),
+            controller: cubit.phone,
             minLines: 1,
             maxLines: 1,
           ),
           MyTff(
             obscureText: false,
             label: "Email Address",
-            controller: TextEditingController(),
+            controller: cubit.email,
             minLines: 1,
             maxLines: 1,
           ),
           MyTff(
             obscureText: false,
             label: "Physical Address",
-            controller: TextEditingController(),
+            controller: cubit.address,
             minLines: 1,
             maxLines: 3,
           ),
