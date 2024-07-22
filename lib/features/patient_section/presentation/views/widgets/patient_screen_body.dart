@@ -1,3 +1,4 @@
+import 'package:dentister/core/widgets/my_snackbar.dart';
 import 'package:dentister/features/patient_section/presentation/manager/patient_cubit.dart';
 import 'package:dentister/features/patient_section/presentation/manager/patient_states.dart';
 import 'package:dentister/features/patient_section/presentation/views/widgets/patient_avatar_add_screen.dart';
@@ -8,6 +9,7 @@ import 'package:dentister/features/patient_section/presentation/views/widgets/ta
 import 'package:dentister/features/patient_section/presentation/views/widgets/tabs/personal_info_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class PatientScreenBody extends StatelessWidget {
   const PatientScreenBody({
@@ -40,7 +42,7 @@ class PatientScreenBody extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: BlocBuilder<PatientCubit,PatientStates>(
+            child: BlocConsumer<PatientCubit,PatientStates>(
               builder: (context,state){
                 return TabBarView(
                   children: [
@@ -51,7 +53,15 @@ class PatientScreenBody extends StatelessWidget {
                     DiagnosticsTab(cubit: cubit),
                   ],
                 );
-              }
+              },
+              listener: (context,state){
+                if(state is PatientStateSuccess){
+                  ScaffoldMessenger.of(context).showSnackBar(MySnackbar(text: "Patient added with id: ${state.id}") as SnackBar);
+                  context.pop();
+                }else if (state is PatientStateFailed){
+                  ScaffoldMessenger.of(context).showSnackBar(MySnackbar(text: "Patient added with id: ${state.error}") as SnackBar);
+                }
+              },
             ),
           ),
           Center(
@@ -61,7 +71,7 @@ class PatientScreenBody extends StatelessWidget {
                 if (tabController != null) {
                   if (tabController.index == tabController.length - 1) {
                     // Execute the button Code you want :
-                    print('done');
+                    cubit.addNewPatient();
                   } else {
                     tabController.animateTo(tabController.index + 1);
                   }

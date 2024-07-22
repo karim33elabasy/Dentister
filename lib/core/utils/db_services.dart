@@ -6,8 +6,8 @@ class DbServices{
 
   static Future<Database> creatingDatabase ()async{
     String dbFolder  = await getDatabasesPath();
-    String dbPath = "$dbFolder/notes.db";
-    return await openDatabase(dbPath,version: 1,onCreate: _onCreate);
+    String dbPath = "$dbFolder/note.db";
+    return await openDatabase(dbPath,version: 2,onCreate: _onCreate);
   }
   static _onCreate(Database db, version)async{
     await db.execute(
@@ -21,6 +21,7 @@ class DbServices{
     email TEXT,
     address TEXT,
     notes TEXT,
+    dentalHistory TEXT,
     dental TEXT,
     medical TEXT,
     family TEXT,
@@ -51,8 +52,8 @@ class DbServices{
     return await database.rawQuery(sql);
   }
 
-  writeData(String sql)async{
-    return await database.rawInsert(sql);
+  Future<int>insertData(String table, Map<String, Object?> values)async{
+    return await database.insert(table, values);
   }
 
   deleteData(String sql)async{

@@ -1,23 +1,23 @@
 class PatientModel {
-  int? id;
-  bool currentPatient;
-  String name;
-  String gender;
-  DateTime? dateBirth;  // Stored as epoch time in database
-  String? phone;
-  String? email;
-  String? address;
-  String? notes;
+  final int? id;
+  final bool currentPatient;
+  final String name;
+  final String gender;
+  final DateTime? dateBirth;  // Stored as epoch time in database
+  final String? phone;
+  final String? email;
+  final String? address;
+  final String? notes;
   // History parameters
-  String? dentalHistory;
-  String? medicalHistory;
-  String? familyHistory;
-  String? allergies;
-  String? dentalNotes;
-  DateTime? lastVisit;  // Stored as epoch time in database
-  String? labTest;
+  final String? dentalHistory;
+  final String? medicalHistory;
+  final String? familyHistory;
+  final String? allergies;
+  final String? dentalNotes;
+  final DateTime? lastVisit;  // Stored as epoch time in database
+  final String? labTest;
 
-  PatientModel({
+  const PatientModel({
     required this.id,
     required this.currentPatient,
     required this.name,
@@ -36,10 +36,10 @@ class PatientModel {
     required this.labTest,
   });
 
-  factory PatientModel.fromJson(Map<String, dynamic> json) {
+  factory PatientModel.fromDb(Map<String, dynamic> json) {
     return PatientModel(
       id: json['id'],
-      currentPatient: json['currentPatient'],
+      currentPatient: json['currentPatient'] == 1,  // Convert integer to bool
       name: json['name'],
       gender: json['gender'],
       dateBirth: json['dateBirth'] != null ? DateTime.fromMillisecondsSinceEpoch(json['dateBirth']) : null,
@@ -57,10 +57,10 @@ class PatientModel {
     );
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, Object?> toDb() {
     return {
       'id': id,
-      'currentPatient':currentPatient,
+      'currentPatient': currentPatient ? 1 : 0, // Convert bool to integer
       'name': name,
       'gender': gender,
       'dateBirth': dateBirth?.millisecondsSinceEpoch,
