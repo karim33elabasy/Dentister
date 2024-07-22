@@ -18,7 +18,7 @@ class PersonalInfoTab extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text("Current Patient ?", style: TextStyle(fontSize: MediaQuery.sizeOf(context).width * 0.04)),
-              Switch(value: true, onChanged: (value) {}),
+              Switch(value: cubit.currentPatient, onChanged: (value) {cubit.currentPatient = value;}),
             ],
           ),
           SizedBox(height: MediaQuery.sizeOf(context).width*0.05),

@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class PatientCubit extends Cubit<PatientStates>{
   PatientCubit():super(PatientStateInitial());
   TextEditingController id = TextEditingController();
+  bool _currentPatient = true;
   TextEditingController name = TextEditingController();
   TextEditingController birth = TextEditingController();
   TextEditingController notes = TextEditingController();
@@ -25,6 +26,13 @@ class PatientCubit extends Cubit<PatientStates>{
   TextEditingController photographs = TextEditingController();
   TextEditingController labTest = TextEditingController();
 
+  set currentPatient(bool value){
+    _currentPatient = value;
+    emit(PatientStateInitial());
+  }
+  bool get currentPatient{
+    return _currentPatient;
+  }
   addNewPatient(PatientModel patient){
     emit(PatientStateLoading());
   }
