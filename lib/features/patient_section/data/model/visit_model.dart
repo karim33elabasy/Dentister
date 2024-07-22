@@ -1,32 +1,36 @@
 class VisitModel {
+  int visitId;
   int patientId;
   DateTime visitDate;
   String? visitNotes;
 
   VisitModel({
+    required this.visitId,
     required this.patientId,
     required this.visitDate,
     required this.visitNotes,
   });
 
-  factory VisitModel.fromJson(Map<String, dynamic> json) {
+  factory VisitModel.fromMap(Map<String, dynamic> map) {
     return VisitModel(
-      patientId: json['patientId'],
-      visitDate: DateTime.parse(json['visitDate']),
-      visitNotes: json['visitNotes'],
+      visitId: map['visitId'],
+      patientId: map['patientId'],
+      visitDate: DateTime.fromMillisecondsSinceEpoch(map['visitDate']),
+      visitNotes: map['visitNotes'],
     );
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     return {
+      'visitId': visitId,
       'patientId': patientId,
-      'visitDate': visitDate.toIso8601String(),
+      'visitDate': visitDate.millisecondsSinceEpoch,
       'visitNotes': visitNotes,
     };
   }
 
   @override
   String toString() {
-    return 'VisitModel{patientId: $patientId, visitDate: $visitDate, visitNotes: $visitNotes}';
+    return 'VisitModel{visitId: $visitId, patientId: $patientId, visitDate: $visitDate, visitNotes: $visitNotes}';
   }
 }

@@ -37,6 +37,25 @@ class PersonalInfoTab extends StatelessWidget {
             minLines: 1,
             maxLines: 1,
           ),
+          DropdownButtonFormField<String>(
+            decoration: InputDecoration(
+              fillColor: Colors.white,
+              label: const Text("Select gender"),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            value: cubit.gender,
+
+            items: const [
+              DropdownMenuItem(child: Text("Male"), value: "male"),
+              DropdownMenuItem(child: Text("Female"), value: "female"),
+            ],
+            onChanged: (value) {
+              cubit.gender=value;
+            },
+          ),
+          SizedBox(height: MediaQuery.sizeOf(context).width*0.05,),
           MyTff(
             obscureText: false,
             label: "Date of Birth",
@@ -51,25 +70,13 @@ class PersonalInfoTab extends StatelessWidget {
               }
             },
           ),
-          DropdownButtonFormField<String>(
-            decoration: InputDecoration(
-              fillColor: Colors.white,
-              label: const Text("Select gender"),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-            value: cubit.gender,
-      
-            items: const [
-              DropdownMenuItem(child: Text("Male"), value: "male"),
-              DropdownMenuItem(child: Text("Female"), value: "female"),
-            ],
-            onChanged: (value) {
-              cubit.gender=value;
-            },
+          MyTff(
+            obscureText: false,
+            label: "Notes about patient",
+            controller: cubit.notes,
+            minLines: 1,
+            maxLines: 3,
           ),
-          SizedBox(height: MediaQuery.sizeOf(context).width*0.05,),
         ],
       ),
     );

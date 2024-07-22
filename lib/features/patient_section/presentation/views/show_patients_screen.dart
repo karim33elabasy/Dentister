@@ -7,15 +7,18 @@ class ShowPatientsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            ShowPatientsAppbar(),
-            Expanded(
-              child: ShowPatientsBody()
-            )
-          ],
+    return const DefaultTabController(
+      length: 5,
+      child: Scaffold(
+        body: SafeArea(
+          child: Column(
+            children: [
+              ShowPatientsAppbar(),
+              Expanded(
+                child: ShowPatientsBody()
+              )
+            ],
+          ),
         ),
       ),
     );

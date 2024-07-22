@@ -11,14 +11,40 @@ class DbServices{
   }
   static _onCreate(Database db, version)async{
     await db.execute(
-      """CREATE TABLE 'notes'(
-          'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-          'title' TEXT NOT NULL,
-          'body' TEXT NOT NULL,
-          'day' INTEGER NOT NULL,
-          'month' INTEGER NOT NULL,
-          'year' INTEGER NOT NULL)
-      """);
+      """CREATE TABLE IF NOT EXISTS patients (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    currentPatient INTEGER NOT NULL,
+    name TEXT NOT NULL,
+    gender TEXT NOT NULL,
+    dateBirth INTEGER,
+    phone TEXT,
+    email TEXT,
+    address TEXT,
+    notes TEXT,
+    dental TEXT,
+    medical TEXT,
+    family TEXT,
+    allergies TEXT,
+    dentalNotes TEXT,
+    lastVisit INTEGER,
+    labTest TEXT)""");
+
+    await db.execute(
+      """CREATE TABLE IF NOT EXISTS visits (
+    visitId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    patientId INTEGER NOT NULL,
+    visitDate INTEGER NOT NULL,  -- stores epoch time
+    visitNotes TEXT)""");
+
+    await db.execute(
+        """CREATE TABLE IF NOT EXISTS finances (
+    financeId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    patientId INTEGER NOT NULL,
+    visitId INTEGER,
+    isIn INTEGER NOT NULL,
+    visitNotes TEXT,
+    date INTEGER,
+    value INTEGER NOT NULL)""");
   }
 
   readData(String sql)async{

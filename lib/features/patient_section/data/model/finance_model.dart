@@ -1,40 +1,48 @@
-class VisitModel {
+class FinanceModel {
+  int financeId;
   int patientId;
-  DateTime visitDate;
-  String visitNotes;
-  DateTime date;
-  VisitModel visit;
+  int? visitId;
+  int isIn; // 1 for income, 0 for expense
+  String? visitNotes;
+  DateTime? date; // Store as DateTime, but convert to integer for storage
+  int value;
 
-  VisitModel({
+  FinanceModel({
+    required this.financeId,
     required this.patientId,
-    required this.visitDate,
+    required this.visitId,
+    required this.isIn,
     required this.visitNotes,
     required this.date,
-    required this.visit,
+    required this.value,
   });
 
-  factory VisitModel.fromJson(Map<String, dynamic> json) {
-    return VisitModel(
-      patientId: json['patientId'],
-      visitDate: DateTime.parse(json['is']),
-      visitNotes: json['visitNotes'],
-      date: DateTime.parse(json['date']),
-      visit: VisitModel.fromJson(json['visit']),
+  factory FinanceModel.fromMap(Map<String, dynamic> map) {
+    return FinanceModel(
+      financeId: map['financeId'],
+      patientId: map['patientId'],
+      visitId: map['visitId'],
+      isIn: map['isIn'],
+      visitNotes: map['visitNotes'],
+      date: map['date'] != null ? DateTime.fromMillisecondsSinceEpoch(map['date']) : null,
+      value: map['value'],
     );
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     return {
+      'financeId': financeId,
       'patientId': patientId,
-      'is': visitDate.toIso8601String(),
+      'visitId': visitId,
+      'isIn': isIn,
       'visitNotes': visitNotes,
-      'date': date.toIso8601String(),
-      'visit': visit.toJson(),
+      'date': date?.millisecondsSinceEpoch,
+      'value': value,
     };
   }
 
   @override
   String toString() {
-    return 'VisitModel{patientId: $patientId, visitDate: $visitDate, visitNotes: $visitNotes, date: $date, visit: $visit}';
+    return 'FinanceModel{financeId: $financeId, patientId: $patientId, visitId: $visitId, isIn: $isIn, visitNotes: $visitNotes, date: $date, value: $value}';
   }
 }

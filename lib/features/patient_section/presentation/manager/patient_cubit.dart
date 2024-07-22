@@ -1,13 +1,14 @@
-import 'package:bloc/bloc.dart';
 import 'package:dentister/features/patient_section/data/model/patient_model.dart';
 import 'package:dentister/features/patient_section/presentation/manager/patient_states.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PatientCubit extends Cubit<PatientStates>{
   PatientCubit():super(PatientStateInitial());
   TextEditingController id = TextEditingController();
   TextEditingController name = TextEditingController();
   TextEditingController birth = TextEditingController();
+  TextEditingController notes = TextEditingController();
   DateTime? birthDateTime;
   String? gender;
   TextEditingController phone = TextEditingController();
