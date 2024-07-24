@@ -20,13 +20,14 @@ class _ShowPatientsBodyState extends State<ShowPatientsBody> {
   }
   @override
   Widget build(BuildContext context) {
-    PatientCubit cubit = BlocProvider.of<PatientCubit>(context);
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: MediaQuery.sizeOf(context).width * 0.045,
         vertical: MediaQuery.sizeOf(context).width * 0.05,
       ),
+
       child: BlocConsumer<PatientCubit,PatientStates>(
+
         builder: (context,state) {
           if (state is PatientStateSuccessList){
             return ShowPatientsListView(patients: state.patients,);
@@ -35,6 +36,7 @@ class _ShowPatientsBodyState extends State<ShowPatientsBody> {
           }
 
         },
+
         listener: (context,state){
           if (state is PatientStateFailed){
             ScaffoldMessenger.of(context).showSnackBar(mySnackBar(text: state.error, context: context));

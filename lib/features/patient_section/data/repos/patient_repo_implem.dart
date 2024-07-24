@@ -36,13 +36,23 @@ class PatientRepoImplem implements PatientRepo{
       return Left(Failure(errMsg: "Unexpected error: ${e.toString()}"));
     }
   }
-  @override
-  deletePatient(int patientId) {
 
+  @override
+  Future<Either<Failure,int>>editPatient(int patientId, PatientModel patient)async{
+    try{
+      int resultDel = await dbServices.deleteData("patients", patientId);
+      var resultCreate = await dbServices.insertData('patients', patient.toDb());
+      if (resultDel>0 && resultCreate >0){
+        return Right(resultCreate);
+      }
+      return Left(Failure(errMsg: "Error happened while modifying data"));
+    }catch(e){
+      return Left(Failure(errMsg: "Unexpected error: ${e.toString()}"));
+    }
   }
 
   @override
-  editPatient(int patientId, PatientModel patient) {
+  deletePatient(int patientId) {
 
   }
 

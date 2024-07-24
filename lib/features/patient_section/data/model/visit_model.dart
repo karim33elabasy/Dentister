@@ -1,10 +1,10 @@
 class VisitModel {
-  int visitId;
-  int patientId;
-  DateTime visitDate;
-  String? visitNotes;
+  final int visitId;
+  final int patientId;
+  final DateTime visitDate;
+  final String? visitNotes;
 
-  VisitModel({
+  const VisitModel({
     required this.visitId,
     required this.patientId,
     required this.visitDate,

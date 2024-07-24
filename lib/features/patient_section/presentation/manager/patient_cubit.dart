@@ -60,9 +60,10 @@ class PatientCubit extends Cubit<PatientStates> {
     );
   }
 
-  editPatient(int patientId, PatientModel patient) {
+  editPatient(int patientId, PatientModel patient)async{
     emit(PatientStateLoading());
-  }
+    var result = await patientRepoImplem.editPatient(patientId, patient);
+
 
   deletePatient(int patientId) {
     emit(PatientStateLoading());

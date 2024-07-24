@@ -1,13 +1,13 @@
 class FinanceModel {
-  int financeId;
-  int patientId;
-  int? visitId;
-  int isIn; // 1 for income, 0 for expense
-  String? visitNotes;
-  DateTime? date; // Store as DateTime, but convert to integer for storage
-  int value;
+  final int financeId;
+  final int patientId;
+  final int? visitId;
+  final int isIn; // 1 for income, 0 for expense
+  final String? visitNotes;
+  final DateTime? date; // Store as DateTime, but convert to integer for storage
+  final int value;
 
-  FinanceModel({
+  const FinanceModel({
     required this.financeId,
     required this.patientId,
     required this.visitId,

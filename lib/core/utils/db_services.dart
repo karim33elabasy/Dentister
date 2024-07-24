@@ -53,8 +53,8 @@ class DbServices {
     return await database.insert(table, values);
   }
 
-  deleteData(String sql) async {
-    return await database.rawDelete(sql);
+  deleteData(String table,int id) async {
+    return await database.delete(table,where: "id = ?",whereArgs: [id]);
   }
 
   updateData(String sql) async {

@@ -1,8 +1,10 @@
+import 'package:dentister/features/patient_section/data/model/patient_model.dart';
 import 'package:dentister/features/patient_section/presentation/views/widgets/patient_info_widget.dart';
 import 'package:flutter/material.dart';
 
 class ShowPatientWidget extends StatelessWidget {
-  const ShowPatientWidget({super.key});
+  final PatientModel patient;
+  const ShowPatientWidget({super.key, required this.patient});
 
   @override
   Widget build(BuildContext context) {
@@ -43,23 +45,26 @@ class ShowPatientWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Patient ID : #45212",maxLines: 1,style: TextStyle(fontSize: width*0.03,color: Colors.black87,overflow: TextOverflow.ellipsis),),
-                      Text("Ahmed Said Metwally",maxLines: 1,style: TextStyle(fontSize: width*0.04,fontWeight: FontWeight.w700,color: Colors.black87,overflow: TextOverflow.ellipsis),),
-                      Text("No notes to display ...",maxLines: 1,style: TextStyle(fontSize: width*0.03,color: Colors.black87,overflow: TextOverflow.ellipsis),),
+                      Text("Patient ID : ${patient.id}",maxLines: 1,style: TextStyle(fontSize: width*0.03,color: Colors.black87,overflow: TextOverflow.ellipsis),),
+                      Text(patient.name,maxLines: 1,style: TextStyle(fontSize: width*0.04,fontWeight: FontWeight.w700,color: Colors.black87,overflow: TextOverflow.ellipsis),),
+                      Text(patient.notes?? "No notes to display ..."
+                        ,maxLines: 1,style: TextStyle(fontSize: width*0.03,color: Colors.black87,overflow: TextOverflow.ellipsis),),
 
                     ],
                   ),
                 ),
               ),
-              Icon(Icons.circle_rounded,color: Colors.greenAccent,size: width*0.06,)
+              Icon(Icons.circle_rounded,color: patient.currentPatient==true? Colors.greenAccent:Colors.redAccent,size: width*0.06,)
             ],
           ),
           SizedBox(height: width*0.02,),
-          const PatientInfoWidget(iconData: Icons.location_on_outlined,text: "No adreh jfhd fkjdh nmfbd smn bs snvmnfvbnvvvvvvvvvjkff v",),
-          const PatientInfoWidget(iconData: Icons.person,text: "30 years old",),
-          const PatientInfoWidget(iconData: Icons.phone,text: "0121321321351",),
-          const PatientInfoWidget(iconData: Icons.calendar_month,text: "Last visit : 16/7/2024",),
-          const PatientInfoWidget(iconData: Icons.next_week_outlined,text: "next visit: cleaning and shaping of lower right six",),
+           PatientInfoWidget(iconData: Icons.location_on_outlined,text: patient.address??"No available address",),
+           PatientInfoWidget(iconData: Icons.person,
+             text: patient.dateBirth== null? "Not available":"${DateTime.now().year - patient.dateBirth!.year} years old",),
+           PatientInfoWidget(iconData: Icons.phone,text: patient.phone?? "Not available",),
+           PatientInfoWidget(iconData: Icons.calendar_month,
+             text: patient.lastVisit== null? "Not available":"${patient.lastVisit!.day}/${patient.lastVisit!.month}/${patient.lastVisit!.year}",),
+           PatientInfoWidget(iconData: Icons.next_week_outlined,text: "next visit: cleaning and shaping of lower right six",),
         ],
       ),
     );

@@ -11,7 +11,7 @@ class ShowPatientsListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       separatorBuilder: (context,counter)=>SizedBox(height: MediaQuery.sizeOf(context).width*0.03,),
-      itemBuilder: (context,counter)=>const ShowPatientWidget(),
+      itemBuilder: (context,counter)=> ShowPatientWidget(patient: patients[counter],),
       itemCount: patients.length,
     );
   }
