@@ -47,9 +47,7 @@ class PatientScreenBody extends StatelessWidget {
               builder: (context, state) {
                 return TabBarView(
                   children: [
-                    PersonalInfoTab(
-                      cubit: cubit,
-                    ),
+                    PersonalInfoTab(cubit: cubit,),
                     ContactInfoTab(cubit: cubit),
                     MedicalHistoryTab(cubit: cubit),
                     DentalHistoryTab(cubit: cubit),

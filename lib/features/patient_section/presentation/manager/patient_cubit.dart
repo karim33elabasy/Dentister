@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class PatientCubit extends Cubit<PatientStates> {
   final PatientRepoImplem patientRepoImplem;
   PatientCubit(this.patientRepoImplem) : super(PatientStateInitial());
+
   TextEditingController id = TextEditingController();
   bool _currentPatient = true;
   TextEditingController name = TextEditingController();
@@ -25,12 +26,9 @@ class PatientCubit extends Cubit<PatientStates> {
   TextEditingController lastVisitDateTime = TextEditingController();
   DateTime? lastVisit;
   TextEditingController labTests = TextEditingController();
-  final GlobalKey<FormState> contactInfoFormKey = GlobalKey<FormState>();
-  final GlobalKey<FormState> dentalHistoryFormKey = GlobalKey<FormState>();
-  final GlobalKey<FormState> labTestsFormKey = GlobalKey<FormState>();
-  final GlobalKey<FormState> medicalHistoryFormKey = GlobalKey<FormState>();
-  final GlobalKey<FormState> personalInfoFormKey = GlobalKey<FormState>();
 
+  final GlobalKey<FormState> personalInfoFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> contactInfoFormKey = GlobalKey<FormState>();
 
   set currentPatient(bool value) {
     _currentPatient = value;
@@ -48,6 +46,7 @@ class PatientCubit extends Cubit<PatientStates> {
       emit(PatientStateFailed(error: error.errMsg));
     }, (id) {
       emit(PatientStateSuccess(id: id));
+      _clearParameters(); // Clear parameters after successful patient addition
     });
   }
 
@@ -59,23 +58,49 @@ class PatientCubit extends Cubit<PatientStates> {
     emit(PatientStateLoading());
   }
 
+  /// Clears all the parameters to reset the form fields and data
+  void _clearParameters() {
+    id.clear();
+    _currentPatient = true;
+    name.clear();
+    birthDateTime.clear();
+    gender = null;
+    birth = null;
+    phone.clear();
+    email.clear();
+    address.clear();
+    notes.clear();
+    dentalHistory.clear();
+    medicalHistory.clear();
+    familyHistory.clear();
+    allergies.clear();
+    dentalNotes.clear();
+    lastVisitDateTime.clear();
+    lastVisit = null;
+    labTests.clear();
+  }
+
+  /// Creates a [PatientModel] from the current form data
   PatientModel _makePatient() {
     return PatientModel(
-        id: null,
-        currentPatient: currentPatient,
-        name: name.text,
-        gender: gender!,
-        dateBirth: birth,
-        phone: phone.text,
-        email: email.text,
-        address: address.text,
-        notes: notes.text,
-        dentalHistory: dentalHistory.text,
-        medicalHistory: medicalHistory.text,
-        familyHistory: familyHistory.text,
-        allergies: allergies.text,
-        dentalNotes: dentalNotes.text,
-        lastVisit: lastVisit,
-        labTest: labTests.text);
+      id: null,
+      currentPatient: currentPatient,
+      name: name.text,
+      gender: gender!,
+      dateBirth: birth,
+      phone: phone.text,
+      email: email.text,
+      address: address.text,
+      notes: notes.text,
+      dentalHistory: dentalHistory.text,
+      medicalHistory: medicalHistory.text,
+      familyHistory: familyHistory.text,
+      allergies: allergies.text,
+      dentalNotes: dentalNotes.text,
+      lastVisit: lastVisit,
+      labTest: labTests.text,
+    );
   }
+
 }
+

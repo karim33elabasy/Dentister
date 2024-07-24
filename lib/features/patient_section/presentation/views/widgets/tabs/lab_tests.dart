@@ -8,21 +8,18 @@ class LabTests extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: cubit.labTestsFormKey,
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            MyTff(
-              obscureText: false,
-              label: "Lab Tests",
-              controller: cubit.labTests,
-              minLines: 1,
-              maxLines: 3,
-            ),
-          ],
-        ),
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          MyTff(
+            obscureText: false,
+            label: "Lab Tests",
+            controller: cubit.labTests,
+            minLines: 1,
+            maxLines: 3,
+          ),
+        ],
       ),
     );
   }

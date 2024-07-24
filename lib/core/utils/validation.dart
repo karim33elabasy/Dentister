@@ -2,9 +2,10 @@ class Validation{
 
   /// Validates a non-empty name.
   static String? validateName(String? value) {
-    if (value == null || value.trim().isEmpty) {
+    if (value == null || value.isEmpty) {
       return 'Name cannot be empty';
-    }else if(value.length<3){
+    }
+    if(value.length<3){
       return 'Name is too short';
     }
     return null;
@@ -12,7 +13,7 @@ class Validation{
 
   /// Validates gender which should be either Male or Female.
   static String? validateGender(String? value) {
-    if (value == null || (value != 'Male' && value != 'Female')) {
+    if (value == null || (value != "Male" && value != "Female" || value.isEmpty)) {
       return 'Gender must be Male or Female';
     }
     return null;
@@ -46,16 +47,24 @@ class Validation{
     return null;
   }
 
-  /// Validates a phone number which could be empty or valid if not empty.
+  /// Validates a phone number, ensuring it contains only numbers or is empty.
   static String? validatePhoneNumber(String? value) {
     if (value == null || value.isEmpty) {
       return null; // Valid if empty
     }
-    // Check for a valid phone number format
-    final phoneRegExp = RegExp(r'^\+?[0-9]{7,15}$');
+    // Check for a valid phone number format (numeric only with optional formatting)
+    final phoneRegExp = RegExp(r'^\+?[0-9\s\-\(\)]*$');
+
     if (!phoneRegExp.hasMatch(value)) {
-      return 'Enter a valid phone number';
+      return 'Enter a valid phone number without letters';
     }
+
+    // Count numeric digits
+    int digitCount = value.replaceAll(RegExp(r'[^0-9]'), '').length;
+    if (digitCount < 5) {
+      return 'Phone number must is too short';
+    }
+
     return null;
   }
 

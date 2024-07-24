@@ -1,7 +1,6 @@
 import 'package:dentister/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../manager/patient_cubit.dart';
 
 class SavePatientButton extends StatelessWidget {
@@ -15,8 +14,26 @@ class SavePatientButton extends StatelessWidget {
         TabController? tabController = DefaultTabController.of(context);
         if (tabController != null) {
           if (tabController.index == tabController.length - 1) {
-            // Execute the button Code you want :
-            cubit.addNewPatient();
+            //Check Validation :
+
+            print("/"*1000);
+            print("personalInfo: ${cubit.personalInfoFormKey.currentState?.validate()}");
+            print(cubit.name.toString());
+            print("contactInfo: ${cubit.contactInfoFormKey.currentState?.validate()}");
+            print(cubit.phone.toString());
+
+            if (cubit.personalInfoFormKey.currentState?.validate() != null){
+              print("In1 "*200);
+              tabController.animateTo(tabController.index = 0);
+            }
+            else if (cubit.contactInfoFormKey.currentState?.validate() != null){
+              print("In2 "*200);
+              tabController.animateTo(tabController.index = 1);
+            }
+            else{
+              // Execute the button Code you want :
+              cubit.addNewPatient();
+            }
           } else {
             tabController.animateTo(tabController.index + 1);
           }

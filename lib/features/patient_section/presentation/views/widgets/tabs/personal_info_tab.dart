@@ -1,3 +1,4 @@
+import 'package:dentister/core/utils/validation.dart';
 import 'package:dentister/features/patient_section/presentation/manager/patient_cubit.dart';
 import 'package:flutter/material.dart';
 import '../../../../../../core/widgets/my_tff.dart';
@@ -10,6 +11,7 @@ class PersonalInfoTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Form(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       key: cubit.personalInfoFormKey,
       child: SingleChildScrollView(
         child: Column(
@@ -43,10 +45,13 @@ class PersonalInfoTab extends StatelessWidget {
               controller: cubit.name,
               minLines: 1,
               maxLines: 1,
-              validator: ,
+              validator: Validation.validateName,
+              requiredField: true,
             ),
             DropdownButtonFormField<String>(
+              validator: Validation.validateGender,
               decoration: InputDecoration(
+                helperText: "Required Field",
                 fillColor: Colors.white,
                 label: const Text("Select gender"),
                 border: OutlineInputBorder(
@@ -55,8 +60,8 @@ class PersonalInfoTab extends StatelessWidget {
               ),
               value: cubit.gender,
               items: const [
-                DropdownMenuItem(value: "male", child: Text("Male")),
-                DropdownMenuItem(value: "female", child: Text("Female")),
+                DropdownMenuItem(value: "Male", child: Text("Male")),
+                DropdownMenuItem(value: "Female", child: Text("Female")),
               ],
               onChanged: (value) {
                 cubit.gender = value;
@@ -66,6 +71,7 @@ class PersonalInfoTab extends StatelessWidget {
               height: MediaQuery.sizeOf(context).width * 0.05,
             ),
             MyTff(
+              validator: Validation.validateBirthDate,
               obscureText: false,
               label: "Date of Birth",
               controller: cubit.birthDateTime,

@@ -10,7 +10,8 @@ class MyTff extends StatelessWidget {
   final bool? enabled;
   final void Function()? onTap;
   final String? Function(String?)? validator;
-  const MyTff({super.key, required this.obscureText, required this.label, required this.controller, required this.maxLines, required this.minLines, this.bottomPadding, this.enabled, this.onTap, this.validator});
+  final bool? requiredField;
+  const MyTff({super.key, required this.obscureText, required this.label, required this.controller, required this.maxLines, required this.minLines, this.bottomPadding, this.enabled, this.onTap, this.validator, this.requiredField});
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +28,7 @@ class MyTff extends StatelessWidget {
         obscureText: obscureText,
         controller: controller,
         decoration: InputDecoration(
+          helperText: requiredField==true? "Required field":null,
           label: Text(label),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),

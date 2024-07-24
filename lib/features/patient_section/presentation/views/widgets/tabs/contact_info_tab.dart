@@ -1,3 +1,4 @@
+import 'package:dentister/core/utils/validation.dart';
 import 'package:flutter/material.dart';
 import '../../../../../../core/widgets/my_tff.dart';
 import '../../../manager/patient_cubit.dart';
@@ -9,12 +10,14 @@ class ContactInfoTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Form(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       key: cubit.contactInfoFormKey,
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             MyTff(
+              validator: Validation.validatePhoneNumber,
               obscureText: false,
               label: "Phone Number",
               controller: cubit.phone,
@@ -22,6 +25,7 @@ class ContactInfoTab extends StatelessWidget {
               maxLines: 1,
             ),
             MyTff(
+              validator: Validation.validateEmail,
               obscureText: false,
               label: "Email Address",
               controller: cubit.email,
