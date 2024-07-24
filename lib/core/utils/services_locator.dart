@@ -6,9 +6,7 @@ import 'package:sqflite/sqflite.dart';
 GetIt getIt = GetIt.instance;
 
 setup()async{
-  print("1"*100);
   getIt.registerSingleton<Database>(await DbServices.creatingDatabase());
-  print("2"*100);
   getIt.registerSingleton<DbServices>(DbServices(getIt.get<Database>()));
   getIt.registerSingleton<PatientRepoImplem>(PatientRepoImplem(getIt.get<DbServices>()));
 }

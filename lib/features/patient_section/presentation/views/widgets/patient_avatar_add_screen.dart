@@ -17,7 +17,7 @@ class PatientAvatarAddScreen extends StatelessWidget {
             right: 0,
             child: InkWell(
               onTap: (){
-                showModalBottomSheet(useSafeArea: true,context: context, builder: (context)=>GetPhotoBottomSheet());
+                showModalBottomSheet(useSafeArea: true,context: context, builder: (context)=>const GetPhotoBottomSheet());
               },
               splashColor: Colors.transparent,
               child: Container(

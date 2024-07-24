@@ -9,7 +9,8 @@ class MyTff extends StatelessWidget {
   final double? bottomPadding;
   final bool? enabled;
   final void Function()? onTap;
-  const MyTff({super.key, required this.obscureText, required this.label, required this.controller, required this.maxLines, required this.minLines, this.bottomPadding, this.enabled, this.onTap});
+  final String? Function(String?)? validator;
+  const MyTff({super.key, required this.obscureText, required this.label, required this.controller, required this.maxLines, required this.minLines, this.bottomPadding, this.enabled, this.onTap, this.validator});
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +20,7 @@ class MyTff extends StatelessWidget {
       ),
       child: TextFormField(
         onTap: onTap,
+        validator: validator,
         enabled: enabled,
         minLines: minLines,
         maxLines: maxLines,

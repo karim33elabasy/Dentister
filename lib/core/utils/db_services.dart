@@ -6,7 +6,7 @@ class DbServices {
 
   static Future<Database> creatingDatabase() async {
     String dbFolder = await getDatabasesPath();
-    String dbPath = "$dbFolder/note.db";
+    String dbPath = "$dbFolder/data.db";
     return await openDatabase(dbPath, version: 2, onCreate: _onCreate);
   }
 

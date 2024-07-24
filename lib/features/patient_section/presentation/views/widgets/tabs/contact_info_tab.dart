@@ -8,32 +8,35 @@ class ContactInfoTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          MyTff(
-            obscureText: false,
-            label: "Phone Number",
-            controller: cubit.phone,
-            minLines: 1,
-            maxLines: 1,
-          ),
-          MyTff(
-            obscureText: false,
-            label: "Email Address",
-            controller: cubit.email,
-            minLines: 1,
-            maxLines: 1,
-          ),
-          MyTff(
-            obscureText: false,
-            label: "Physical Address",
-            controller: cubit.address,
-            minLines: 1,
-            maxLines: 3,
-          ),
-        ],
+    return Form(
+      key: cubit.contactInfoFormKey,
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            MyTff(
+              obscureText: false,
+              label: "Phone Number",
+              controller: cubit.phone,
+              minLines: 1,
+              maxLines: 1,
+            ),
+            MyTff(
+              obscureText: false,
+              label: "Email Address",
+              controller: cubit.email,
+              minLines: 1,
+              maxLines: 1,
+            ),
+            MyTff(
+              obscureText: false,
+              label: "Physical Address",
+              controller: cubit.address,
+              minLines: 1,
+              maxLines: 3,
+            ),
+          ],
+        ),
       ),
     );
   }

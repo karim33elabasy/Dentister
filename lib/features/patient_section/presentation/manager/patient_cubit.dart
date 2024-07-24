@@ -25,6 +25,12 @@ class PatientCubit extends Cubit<PatientStates> {
   TextEditingController lastVisitDateTime = TextEditingController();
   DateTime? lastVisit;
   TextEditingController labTests = TextEditingController();
+  final GlobalKey<FormState> contactInfoFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> dentalHistoryFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> labTestsFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> medicalHistoryFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> personalInfoFormKey = GlobalKey<FormState>();
+
 
   set currentPatient(bool value) {
     _currentPatient = value;
