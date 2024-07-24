@@ -7,7 +7,6 @@ class PersonalInfoTab extends StatelessWidget {
   const PersonalInfoTab({super.key, required this.cubit});
 
   @override
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -17,11 +16,17 @@ class PersonalInfoTab extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Current Patient ?", style: TextStyle(fontSize: MediaQuery.sizeOf(context).width * 0.04)),
-              Switch(value: cubit.currentPatient, onChanged: (value) {cubit.currentPatient = value;}),
+              Text("Current Patient ?",
+                  style: TextStyle(
+                      fontSize: MediaQuery.sizeOf(context).width * 0.04)),
+              Switch(
+                  value: cubit.currentPatient,
+                  onChanged: (value) {
+                    cubit.currentPatient = value;
+                  }),
             ],
           ),
-          SizedBox(height: MediaQuery.sizeOf(context).width*0.05),
+          SizedBox(height: MediaQuery.sizeOf(context).width * 0.05),
           MyTff(
             obscureText: false,
             label: "Patient ID",
@@ -46,27 +51,31 @@ class PersonalInfoTab extends StatelessWidget {
               ),
             ),
             value: cubit.gender,
-
             items: const [
               DropdownMenuItem(child: Text("Male"), value: "male"),
               DropdownMenuItem(child: Text("Female"), value: "female"),
             ],
             onChanged: (value) {
-              cubit.gender=value;
+              cubit.gender = value;
             },
           ),
-          SizedBox(height: MediaQuery.sizeOf(context).width*0.05,),
+          SizedBox(
+            height: MediaQuery.sizeOf(context).width * 0.05,
+          ),
           MyTff(
             obscureText: false,
             label: "Date of Birth",
-            controller: cubit.birth,
+            controller: cubit.birthDateTime,
             minLines: 1,
             maxLines: 1,
-            onTap: ()async{
-              cubit.birthDateTime = await showDatePicker(context: context, firstDate: DateTime(1900), lastDate: DateTime.now());
-              if (cubit.birthDateTime != null){
-                cubit.birth.text =
-                "${cubit.birthDateTime!.day}/${cubit.birthDateTime!.month}/${cubit.birthDateTime!.year}";
+            onTap: () async {
+              cubit.birth = await showDatePicker(
+                  context: context,
+                  firstDate: DateTime(1900),
+                  lastDate: DateTime.now());
+              if (cubit.birth != null) {
+                cubit.birthDateTime.text =
+                "${cubit.birth!.day}/${cubit.birth!.month}/${cubit.birth!.year}";
               }
             },
           ),

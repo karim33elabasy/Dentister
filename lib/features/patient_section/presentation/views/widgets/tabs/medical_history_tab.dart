@@ -14,22 +14,15 @@ class MedicalHistoryTab extends StatelessWidget {
         children: [
           MyTff(
             obscureText: false,
-            label: "Medical Conditions",
-            controller: cubit.medicalCondition,
-            minLines: 1,
-            maxLines: 3,
-          ),
-          MyTff(
-            obscureText: false,
-            label: "Current Medications",
-            controller: cubit.currentMedication,
+            label: "Medical History",
+            controller: cubit.medicalHistory,
             minLines: 1,
             maxLines: 3,
           ),
           MyTff(
             obscureText: false,
             label: "Family Medical History",
-            controller: cubit.familyMedicalHistory,
+            controller: cubit.familyHistory,
             minLines: 1,
             maxLines: 3,
           ),

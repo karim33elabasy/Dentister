@@ -15,23 +15,33 @@ class DentalHistoryTab extends StatelessWidget {
           MyTff(
             obscureText: false,
             label: "Previous Dental Treatments",
-            controller: cubit.previousDentalttt,
+            controller: cubit.dentalHistory,
             minLines: 1,
             maxLines: 3,
           ),
           MyTff(
             obscureText: false,
-            label: "Dental Conditions",
-            controller: cubit.dentalConditions,
+            label: "Dental notes",
+            controller: cubit.dentalNotes,
             minLines: 1,
             maxLines: 3,
           ),
           MyTff(
             obscureText: false,
-            label: "Previous X-rays and Imaging",
-            controller: cubit.previousXrays,
+            label: "Last dental visit",
+            controller: cubit.lastVisitDateTime,
             minLines: 1,
-            maxLines: 3,
+            maxLines: 1,
+            onTap: () async {
+              cubit.lastVisit = await showDatePicker(
+                  context: context,
+                  firstDate: DateTime(1900),
+                  lastDate: DateTime.now());
+              if (cubit.lastVisit != null) {
+                cubit.lastVisitDateTime.text =
+                "${cubit.lastVisit!.day}/${cubit.lastVisit!.month}/${cubit.lastVisit!.year}";
+              }
+            },
           ),
         ],
       ),
