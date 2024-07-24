@@ -56,7 +56,7 @@ class PatientScreenBody extends StatelessWidget {
                 );
               },
               listener: (context, state) {
-                if (state is PatientStateSuccess) {
+                if (state is PatientStateSuccessInt) {
                   ScaffoldMessenger.of(context).showSnackBar(
                       mySnackBar(text: "Patient added with id: ${state.id}",context: context));
                   context.pop();

@@ -1,9 +1,15 @@
+import 'package:dentister/features/patient_section/data/model/patient_model.dart';
+
 abstract class PatientStates{}
 class PatientStateInitial extends PatientStates{}
 class PatientStateLoading extends PatientStates{}
-class PatientStateSuccess extends PatientStates{
+class PatientStateSuccessInt extends PatientStates{
   final int id;
-  PatientStateSuccess({required this.id});
+  PatientStateSuccessInt({required this.id});
+}
+class PatientStateSuccessList extends PatientStates{
+  final List<PatientModel> patients;
+  PatientStateSuccessList({required this.patients});
 }
 class PatientStateFailed extends PatientStates{
   final String error;

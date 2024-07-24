@@ -8,7 +8,6 @@ class PersonalInfoTab extends StatelessWidget {
   const PersonalInfoTab({super.key, required this.cubit});
 
   @override
-  @override
   Widget build(BuildContext context) {
     return Form(
       autovalidateMode: AutovalidateMode.onUserInteraction,

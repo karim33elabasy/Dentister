@@ -20,7 +20,22 @@ class PatientRepoImplem implements PatientRepo{
       );
     }
   }
-
+  @override
+  Future<Either<Failure,List<PatientModel>>>getPatients(String? filter)async{
+    try{
+      var result =
+          filter!=null? await dbServices.readData("SELECT * FROM 'patients' WHERE 'name'='$filter' OR 'phone'='$filter' OR 'address'='$filter'")
+        : await dbServices.readData("SELECT * FROM patients");
+      List<PatientModel> patients = [];
+      for(var patient in result){
+        patients.add(PatientModel.fromDb(patient));
+      }
+      if(patients.length==0) return Left(Failure(errMsg: "No patients found !"));
+      return Right(patients);
+    }catch(e){
+      return Left(Failure(errMsg: "Unexpected error: ${e.toString()}"));
+    }
+  }
   @override
   deletePatient(int patientId) {
 

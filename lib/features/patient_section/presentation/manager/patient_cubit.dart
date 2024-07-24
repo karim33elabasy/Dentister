@@ -27,8 +27,8 @@ class PatientCubit extends Cubit<PatientStates> {
   DateTime? lastVisit;
   TextEditingController labTests = TextEditingController();
 
-  final GlobalKey<FormState> personalInfoFormKey = GlobalKey<FormState>();
-  final GlobalKey<FormState> contactInfoFormKey = GlobalKey<FormState>();
+  late GlobalKey<FormState> personalInfoFormKey= GlobalKey<FormState>();
+  late GlobalKey<FormState> contactInfoFormKey= GlobalKey<FormState>();
 
   set currentPatient(bool value) {
     _currentPatient = value;
@@ -45,9 +45,19 @@ class PatientCubit extends Cubit<PatientStates> {
     result.fold((error) {
       emit(PatientStateFailed(error: error.errMsg));
     }, (id) {
-      emit(PatientStateSuccess(id: id));
+      emit(PatientStateSuccessInt(id: id));
       _clearParameters(); // Clear parameters after successful patient addition
     });
+  }
+
+  getPatients(String? filter)async{
+    emit(PatientStateLoading());
+    // you can add a delay here
+    var result = await patientRepoImplem.getPatients(filter);
+    result.fold(
+      (error){emit(PatientStateFailed(error: error.errMsg));},
+      (patients) {emit(PatientStateSuccessList(patients: patients));}
+    );
   }
 
   editPatient(int patientId, PatientModel patient) {

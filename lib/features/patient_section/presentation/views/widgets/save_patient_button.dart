@@ -1,4 +1,5 @@
 import 'package:dentister/core/utils/app_colors.dart';
+import 'package:dentister/core/utils/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../manager/patient_cubit.dart';
@@ -15,18 +16,11 @@ class SavePatientButton extends StatelessWidget {
         if (tabController != null) {
           if (tabController.index == tabController.length - 1) {
             //Check Validation :
-
-            print("/"*1000);
-            print("personalInfo: ${cubit.personalInfoFormKey.currentState?.validate()}");
-            print(cubit.name.toString());
-            print("contactInfo: ${cubit.contactInfoFormKey.currentState?.validate()}");
-            print(cubit.phone.toString());
-
-            if (cubit.personalInfoFormKey.currentState?.validate() != null){
+            if (Validation.validateName(cubit.name.text)!=null && Validation.validateGender(cubit.gender)!=null){
               print("In1 "*200);
               tabController.animateTo(tabController.index = 0);
             }
-            else if (cubit.contactInfoFormKey.currentState?.validate() != null){
+            else if (Validation.validatePhoneNumber(cubit.phone.text) != null && Validation.validateEmail(cubit.email.text) != null){
               print("In2 "*200);
               tabController.animateTo(tabController.index = 1);
             }

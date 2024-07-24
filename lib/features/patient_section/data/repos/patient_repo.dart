@@ -4,6 +4,7 @@ import '../../../../core/failure/failure.dart';
 
 abstract class PatientRepo{
   Future<Either<Failure,int>>addNewPatient(PatientModel patient);
+  Future<Either<Failure,List<PatientModel>>>getPatients(String? filter);
   editPatient(int patientId,PatientModel patient);
   deletePatient(int patientId);
 }
