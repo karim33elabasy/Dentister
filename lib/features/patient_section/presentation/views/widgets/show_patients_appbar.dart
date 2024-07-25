@@ -1,5 +1,7 @@
 import 'package:dentister/core/utils/app_router.dart';
+import 'package:dentister/features/patient_section/presentation/manager/show_patients_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class ShowPatientsAppbar extends StatelessWidget {
@@ -7,6 +9,7 @@ class ShowPatientsAppbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ShowPatientsCubit cubit = BlocProvider.of<ShowPatientsCubit>(context);
     double width = MediaQuery.sizeOf(context).width;
     double height = MediaQuery.sizeOf(context).height;
     return Container(
@@ -25,12 +28,23 @@ class ShowPatientsAppbar extends StatelessWidget {
             SizedBox(width: width*0.02,),
             Expanded(
               child: TextFormField(
+                controller: cubit.searchPatients,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15)
-                    ),
-                    hintText: "Search with name / phone / location"
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15)
+                  ),
+                  hintText: "Search with name / phone / location",
+                  suffixIcon: IconButton(
+                    icon: const Icon(Icons.cancel_outlined),
+                    onPressed: (){
+                      cubit.searchPatients.text = "";
+                      cubit.getPatients();
+                    },
+                  )
                 ),
+                onChanged: (query){
+                  cubit.getPatients();
+                },
               ),
             ),
             SizedBox(width: width*0.02,),

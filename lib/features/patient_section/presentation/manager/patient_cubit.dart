@@ -30,45 +30,6 @@ class PatientCubit extends Cubit<PatientStates> {
   late GlobalKey<FormState> personalInfoFormKey= GlobalKey<FormState>();
   late GlobalKey<FormState> contactInfoFormKey= GlobalKey<FormState>();
 
-  set currentPatient(bool value) {
-    _currentPatient = value;
-    emit(PatientStateInitial());
-  }
-
-  bool get currentPatient {
-    return _currentPatient;
-  }
-
-  addNewPatient() async {
-    emit(PatientStateLoading());
-    var result = await patientRepoImplem.addNewPatient(_makePatient());
-    result.fold((error) {
-      emit(PatientStateFailed(error: error.errMsg));
-    }, (id) {
-      emit(PatientStateSuccessInt(id: id));
-      _clearParameters(); // Clear parameters after successful patient addition
-    });
-  }
-
-  getPatients(String? filter)async{
-    emit(PatientStateLoading());
-    // you can add a delay here
-    var result = await patientRepoImplem.getPatients(filter);
-    result.fold(
-      (error){emit(PatientStateFailed(error: error.errMsg));},
-      (patients) {emit(PatientStateSuccessList(patients: patients));}
-    );
-  }
-
-  editPatient(int patientId, PatientModel patient)async{
-    emit(PatientStateLoading());
-    var result = await patientRepoImplem.editPatient(patientId, patient);
-
-
-  deletePatient(int patientId) {
-    emit(PatientStateLoading());
-  }
-
   /// Clears all the parameters to reset the form fields and data
   void _clearParameters() {
     id.clear();
@@ -91,10 +52,31 @@ class PatientCubit extends Cubit<PatientStates> {
     labTests.clear();
   }
 
+  void loadParameters(PatientModel patient){
+    id.text=patient.id.toString();
+    currentPatient = patient.currentPatient;
+    name.text=patient.name;
+    print("-"*1000);
+    print(patient.toString());
+    gender=patient.gender;
+    birth=patient.dateBirth;
+    phone.text=patient.phone??"";
+    email.text=patient.email??"";
+    address.text=patient.address??"";
+    notes.text=patient.notes??"";
+    dentalHistory.text=patient.dentalHistory??"";
+    medicalHistory.text=patient.medicalHistory??"";
+    familyHistory.text=patient.familyHistory??"";
+    allergies.text=patient.allergies??"";
+    dentalNotes.text=patient.dentalNotes??"";
+    lastVisit=patient.lastVisit;
+    labTests.text=patient.labTest??"";
+  }
+
   /// Creates a [PatientModel] from the current form data
   PatientModel _makePatient() {
     return PatientModel(
-      id: null,
+      id: id.text.isEmpty? null:int.parse(id.text),
       currentPatient: currentPatient,
       name: name.text,
       gender: gender!,
@@ -112,6 +94,42 @@ class PatientCubit extends Cubit<PatientStates> {
       labTest: labTests.text,
     );
   }
+
+  set currentPatient(bool value) {
+    _currentPatient = value;
+    emit(PatientStateInitial());
+  }
+
+  bool get currentPatient {
+    return _currentPatient;
+  }
+
+  addNewPatient() async {
+    emit(PatientStateLoading());
+    var result = await patientRepoImplem.addNewPatient(_makePatient());
+    result.fold(
+      (error) {emit(PatientStateFailed(error: error.errMsg));},
+      (id) {emit(PatientStateSuccessInt(id: id,isEditing: false));
+    });
+    // Clear parameters after successful patient addition
+    _clearParameters();
+  }
+
+
+  editPatient()async {
+    emit(PatientStateLoading());
+    var result = await patientRepoImplem.editPatient(int.parse(id.text), _makePatient());
+    result.fold(
+      (error) {emit(PatientStateFailed(error: error.errMsg));},
+      (id) {emit(PatientStateSuccessInt(id: id,isEditing: true));
+    });
+    _clearParameters();
+  }
+
+  deletePatient(int patientId) {
+    emit(PatientStateLoading());
+  }
+
 
 }
 

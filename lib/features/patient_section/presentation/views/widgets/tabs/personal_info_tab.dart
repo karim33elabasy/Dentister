@@ -59,8 +59,8 @@ class PersonalInfoTab extends StatelessWidget {
               ),
               value: cubit.gender,
               items: const [
-                DropdownMenuItem(value: "Male", child: Text("Male")),
-                DropdownMenuItem(value: "Female", child: Text("Female")),
+                DropdownMenuItem(value: "male", child: Text("Male")),
+                DropdownMenuItem(value: "female", child: Text("Female")),
               ],
               onChanged: (value) {
                 cubit.gender = value;

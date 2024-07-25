@@ -21,16 +21,15 @@ class PatientRepoImplem implements PatientRepo{
     }
   }
   @override
-  Future<Either<Failure,List<PatientModel>>>getPatients(String? filter)async{
+  Future<Either<Failure,List<PatientModel>>>getPatients(String filter)async{
     try{
       var result =
-          filter!=null? await dbServices.readData("SELECT * FROM 'patients' WHERE 'name'='$filter' OR 'phone'='$filter' OR 'address'='$filter'")
-        : await dbServices.readData("SELECT * FROM patients");
+          filter.isNotEmpty? await dbServices.readData('patients', "name LIKE  ? OR phone LIKE  ? OR address LIKE  ?", ["%$filter%","%$filter%","%$filter%"])
+            : await dbServices.readData("patients",null,null);
       List<PatientModel> patients = [];
       for(var patient in result){
         patients.add(PatientModel.fromDb(patient));
       }
-      if(patients.length==0) return Left(Failure(errMsg: "No patients found !"));
       return Right(patients);
     }catch(e){
       return Left(Failure(errMsg: "Unexpected error: ${e.toString()}"));
@@ -40,10 +39,9 @@ class PatientRepoImplem implements PatientRepo{
   @override
   Future<Either<Failure,int>>editPatient(int patientId, PatientModel patient)async{
     try{
-      int resultDel = await dbServices.deleteData("patients", patientId);
-      var resultCreate = await dbServices.insertData('patients', patient.toDb());
-      if (resultDel>0 && resultCreate >0){
-        return Right(resultCreate);
+      int result = await dbServices.updateData(table: 'patients', values: patient.toDb(), where: 'id = ?', whereArgs: [patient.id!]);
+      if (result>0){
+        return Right(result);
       }
       return Left(Failure(errMsg: "Error happened while modifying data"));
     }catch(e){

@@ -6,7 +6,7 @@ class DbServices {
 
   static Future<Database> creatingDatabase() async {
     String dbFolder = await getDatabasesPath();
-    String dbPath = "$dbFolder/data.db";
+    String dbPath = "$dbFolder/datahj.db";
     return await openDatabase(dbPath, version: 2, onCreate: _onCreate);
   }
 
@@ -45,8 +45,8 @@ class DbServices {
     value INTEGER NOT NULL)""");
   }
 
-  readData(String sql) async {
-    return await database.rawQuery(sql);
+  readData(String table,String? where,List<Object?>? whereArgs) async {
+    return await database.query(table,where:where,whereArgs: whereArgs);
   }
 
   Future<int> insertData(String table, Map<String, Object?> values) async {
@@ -57,7 +57,7 @@ class DbServices {
     return await database.delete(table,where: "id = ?",whereArgs: [id]);
   }
 
-  updateData(String sql) async {
-    return await database.rawUpdate(sql);
+  updateData({required String table, required Map<String,Object?> values, required String? where, required List<Object?>? whereArgs}) async {
+    return await database.update(table, values, where: where,whereArgs: whereArgs);
   }
 }

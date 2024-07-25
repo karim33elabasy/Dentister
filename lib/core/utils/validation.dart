@@ -13,7 +13,7 @@ class Validation{
 
   /// Validates gender which should be either Male or Female.
   static String? validateGender(String? value) {
-    if (value == null || (value != "Male" && value != "Female" || value.isEmpty)) {
+    if (value == null || (value != "male" && value != "female" || value.isEmpty)) {
       return 'Gender must be Male or Female';
     }
     return null;
