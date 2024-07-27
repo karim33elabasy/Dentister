@@ -52,19 +52,20 @@ class Validation{
     if (value == null || value.isEmpty) {
       return null; // Valid if empty
     }
+    if (value.length<5){
+      return 'Phone number must is too short';
+    }
     // Check for a valid phone number format (numeric only with optional formatting)
     final phoneRegExp = RegExp(r'^\+?[0-9\s\-\(\)]*$');
 
     if (!phoneRegExp.hasMatch(value)) {
       return 'Enter a valid phone number without letters';
     }
-
     // Count numeric digits
     int digitCount = value.replaceAll(RegExp(r'[^0-9]'), '').length;
     if (digitCount < 5) {
       return 'Phone number must is too short';
     }
-
     return null;
   }
 

@@ -1,21 +1,25 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+
 class PatientModel {
   final int? id;
   final bool currentPatient;
   final String name;
   final String gender;
   final DateTime? dateBirth;  // Stored as epoch time in database
-  final String? phone;
-  final String? email;
-  final String? address;
-  final String? notes;
+  final String phone;
+  final String email;
+  final String address;
+  final String notes;
+  final Color color;
   // History parameters
-  final String? dentalHistory;
-  final String? medicalHistory;
-  final String? familyHistory;
-  final String? allergies;
-  final String? dentalNotes;
+  final String dentalHistory;
+  final String medicalHistory;
+  final String familyHistory;
+  final String allergies;
+  final String dentalNotes;
   final DateTime? lastVisit;  // Stored as epoch time in database
-  final String? labTest;
+  final String labTest;
 
   const PatientModel({
     required this.id,
@@ -34,6 +38,7 @@ class PatientModel {
     required this.dentalNotes,
     required this.lastVisit,
     required this.labTest,
+    required this.color
   });
 
   factory PatientModel.fromDb(Map<String, dynamic> json) {
@@ -54,6 +59,7 @@ class PatientModel {
       dentalNotes: json['dentalNotes'],
       lastVisit: json['lastVisit'] != null ? DateTime.fromMillisecondsSinceEpoch(json['lastVisit']) : null,
       labTest: json['labTest'],
+      color: Color(int.parse(json['color'], radix: 16))
     );
   }
 
@@ -75,6 +81,7 @@ class PatientModel {
       'dentalNotes': dentalNotes,
       'lastVisit': lastVisit?.millisecondsSinceEpoch,
       'labTest': labTest,
+      'color': color.toHexString()
     };
   }
 
@@ -83,6 +90,6 @@ class PatientModel {
     return 'PatientModel{id: $id, currentPatient: $currentPatient, name: $name, gender: $gender, dateBirth: $dateBirth, '
         'phone: $phone, email: $email, address: $address, notes: $notes, dentalHistory: $dentalHistory, '
         'medicalHistory: $medicalHistory, familyHistory: $familyHistory, allergies: $allergies, '
-        'dentalNotes: $dentalNotes, lastVisit: $lastVisit, labTest: $labTest}';
+        'dentalNotes: $dentalNotes, lastVisit: $lastVisit, labTest: $labTest, color: $color}';
   }
 }

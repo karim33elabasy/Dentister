@@ -34,9 +34,7 @@ class ShowPatientWidget extends StatelessWidget {
             children: [
               Expanded(
                 flex: 1,
-                child: CircleAvatar(
-                  radius: width*0.08,
-                ),
+                child: Icon(Icons.account_circle,color: patient.color,size: width*0.15,),
               ),
               SizedBox(width: width*0.03,),
               Expanded(
@@ -47,7 +45,7 @@ class ShowPatientWidget extends StatelessWidget {
                     children: [
                       Text("Patient ID : ${patient.id}",maxLines: 1,style: TextStyle(fontSize: width*0.03,color: Colors.black87,overflow: TextOverflow.ellipsis),),
                       Text(patient.name,maxLines: 1,style: TextStyle(fontSize: width*0.04,fontWeight: FontWeight.w700,color: Colors.black87,overflow: TextOverflow.ellipsis),),
-                      Text(patient.notes?? "No notes to display ..."
+                      Text(patient.notes.isEmpty? "No notes to display ...":patient.notes
                         ,maxLines: 1,style: TextStyle(fontSize: width*0.03,color: Colors.black87,overflow: TextOverflow.ellipsis),),
 
                     ],
@@ -58,10 +56,10 @@ class ShowPatientWidget extends StatelessWidget {
             ],
           ),
           SizedBox(height: width*0.02,),
-           PatientInfoWidget(iconData: Icons.location_on_outlined,text: patient.address??"No available address",),
+           PatientInfoWidget(iconData: Icons.location_on_outlined,text: patient.address.isEmpty? "No available address":patient.address ,),
            PatientInfoWidget(iconData: Icons.person,
              text: patient.dateBirth== null? "Not available":"${DateTime.now().year - patient.dateBirth!.year} years old",),
-           PatientInfoWidget(iconData: Icons.phone,text: patient.phone?? "Not available",),
+           PatientInfoWidget(iconData: Icons.phone,text: patient.phone.isEmpty? "Not available":patient.phone ,),
            PatientInfoWidget(iconData: Icons.calendar_month,
              text: patient.lastVisit== null? "Not available":"${patient.lastVisit!.day}/${patient.lastVisit!.month}/${patient.lastVisit!.year}",),
            PatientInfoWidget(iconData: Icons.next_week_outlined,text: "next visit: cleaning and shaping of lower right six",),

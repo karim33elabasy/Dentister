@@ -17,7 +17,7 @@ class SavePatientButton extends StatelessWidget {
         TabController? tabController = DefaultTabController.of(context);
           if (tabController.index == tabController.length - 1) {
             //Check Validation :
-            if (Validation.validateName(cubit.name.text)!=null && Validation.validateGender(cubit.gender)!=null){
+            if (Validation.validateName(cubit.name.text)!=null && Validation.validateGender(cubit.gender)!=null || cubit.name.text.isEmpty || cubit.gender == null){
               tabController.animateTo(tabController.index = 0);
             }
             else if (Validation.validatePhoneNumber(cubit.phone.text) != null && Validation.validateEmail(cubit.email.text) != null){

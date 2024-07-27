@@ -1,3 +1,4 @@
+import 'package:dentister/features/calendar/presentation/views/add_visit_screen.dart';
 import 'package:dentister/features/home/presentation/views/home_screen.dart';
 import 'package:dentister/features/patient_section/presentation/views/add_patient_screen.dart';
 import 'package:dentister/features/patient_section/presentation/views/edit_patient_screen.dart';
@@ -11,6 +12,7 @@ abstract class AppRouter{
   static String kAddPatientScreen = "/kAddPatientScreen";
   static String kEditPatientScreen = "/kEditPatientScreen";
   static String kShowPatientsScreen = "/kShowPatientsScreen";
+  static String kAddVisitScreen = "/kAddVisitScreen";
 
   static GoRouter router = GoRouter(
       routes: [
@@ -20,7 +22,7 @@ abstract class AppRouter{
         ),
         GoRoute(
             path: kHomeScreen,
-            builder: (context,state)=>const HomeScreen()
+            builder: (context,state)=> HomeScreen()
         ),
         GoRoute(
             path: kAddPatientScreen,
@@ -33,6 +35,10 @@ abstract class AppRouter{
         GoRoute(
             path: kShowPatientsScreen,
             builder: (context,state)=>const ShowPatientsScreen()
+        ),
+        GoRoute(
+            path: kAddVisitScreen,
+            builder: (context,state)=>const AddVisitScreen()
         ),
       ]
   );

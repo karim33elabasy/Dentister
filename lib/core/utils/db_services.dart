@@ -6,7 +6,7 @@ class DbServices {
 
   static Future<Database> creatingDatabase() async {
     String dbFolder = await getDatabasesPath();
-    String dbPath = "$dbFolder/datahj.db";
+    String dbPath = "$dbFolder/dataaaaaaa.db";
     return await openDatabase(dbPath, version: 2, onCreate: _onCreate);
   }
 
@@ -27,7 +27,8 @@ class DbServices {
     allergies TEXT,
     dentalNotes TEXT,
     lastVisit INTEGER,
-    labTest TEXT)""");
+    labTest TEXT,
+    color TEXT)""");
 
     await db.execute("""CREATE TABLE IF NOT EXISTS visits (
     visitId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,

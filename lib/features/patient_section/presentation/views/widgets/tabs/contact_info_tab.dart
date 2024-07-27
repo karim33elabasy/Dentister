@@ -9,37 +9,45 @@ class ContactInfoTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.sizeOf(context).width;
     return Form(
       autovalidateMode: AutovalidateMode.onUserInteraction,
       key: cubit.contactInfoFormKey,
       child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            MyTff(
-              validator: Validation.validatePhoneNumber,
-              obscureText: false,
-              label: "Phone Number",
-              controller: cubit.phone,
-              minLines: 1,
-              maxLines: 1,
-            ),
-            MyTff(
-              validator: Validation.validateEmail,
-              obscureText: false,
-              label: "Email Address",
-              controller: cubit.email,
-              minLines: 1,
-              maxLines: 1,
-            ),
-            MyTff(
-              obscureText: false,
-              label: "Physical Address",
-              controller: cubit.address,
-              minLines: 1,
-              maxLines: 3,
-            ),
-          ],
+        child: Padding(
+          padding: EdgeInsets.only(
+            right: width * 0.045,
+            left: width * 0.045,
+            top: width * 0.05,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              MyTff(
+                validator: Validation.validatePhoneNumber,
+                obscureText: false,
+                label: "Phone Number",
+                controller: cubit.phone,
+                minLines: 1,
+                maxLines: 1,
+              ),
+              MyTff(
+                validator: Validation.validateEmail,
+                obscureText: false,
+                label: "Email Address",
+                controller: cubit.email,
+                minLines: 1,
+                maxLines: 1,
+              ),
+              MyTff(
+                obscureText: false,
+                label: "Physical Address",
+                controller: cubit.address,
+                minLines: 1,
+                maxLines: 3,
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,13 +1,16 @@
+import 'package:dentister/core/utils/app_colors.dart';
 import 'package:dentister/features/patient_section/data/model/patient_model.dart';
 import 'package:dentister/features/patient_section/data/repos/patient_repo_implem.dart';
 import 'package:dentister/features/patient_section/presentation/manager/patient_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 class PatientCubit extends Cubit<PatientStates> {
   final PatientRepoImplem patientRepoImplem;
   PatientCubit(this.patientRepoImplem) : super(PatientStateInitial());
 
+  Color color = AppColors.blue;
   TextEditingController id = TextEditingController();
   bool _currentPatient = true;
   TextEditingController name = TextEditingController();
@@ -30,6 +33,10 @@ class PatientCubit extends Cubit<PatientStates> {
   late GlobalKey<FormState> personalInfoFormKey= GlobalKey<FormState>();
   late GlobalKey<FormState> contactInfoFormKey= GlobalKey<FormState>();
 
+  setColor(Color selectedColor){
+    color = selectedColor;
+    emit(PatientStateInitial());
+  }
   /// Clears all the parameters to reset the form fields and data
   void _clearParameters() {
     id.clear();
@@ -56,8 +63,6 @@ class PatientCubit extends Cubit<PatientStates> {
     id.text=patient.id.toString();
     currentPatient = patient.currentPatient;
     name.text=patient.name;
-    print("-"*1000);
-    print(patient.toString());
     gender=patient.gender;
     birth=patient.dateBirth;
     phone.text=patient.phone??"";
@@ -92,6 +97,7 @@ class PatientCubit extends Cubit<PatientStates> {
       dentalNotes: dentalNotes.text,
       lastVisit: lastVisit,
       labTest: labTests.text,
+      color: color
     );
   }
 
