@@ -1,6 +1,9 @@
 import 'package:dentister/core/utils/app_colors.dart';
 import 'package:dentister/core/utils/app_router.dart';
+import 'package:dentister/features/calendar/presentation/manager/visit_cubit.dart';
+import 'package:dentister/features/patient_section/presentation/manager/patient_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class MainScreenFloatingButtons extends StatelessWidget {
@@ -14,6 +17,7 @@ class MainScreenFloatingButtons extends StatelessWidget {
         FloatingActionButton(
           heroTag: "addNewPatient",
           onPressed: (){
+            BlocProvider.of<PatientCubit>(context).clearParameters();
             context.push(AppRouter.kAddPatientScreen);
           },
           mini: true,
@@ -24,7 +28,8 @@ class MainScreenFloatingButtons extends StatelessWidget {
         FloatingActionButton(
           heroTag: "addNewEvent",
           onPressed: (){
-            context.push(AppRouter.kAddPatientScreen);
+            BlocProvider.of<VisitCubit>(context).clearParameters();
+            context.push(AppRouter.kAddVisitScreen);
           },
           backgroundColor: AppColors.blue,
           child: const Icon(Icons.add_card_rounded,color: Colors.white,),

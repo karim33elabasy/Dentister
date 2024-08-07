@@ -81,4 +81,14 @@ class Validation{
     }
     return null;
   }
+
+  static String? validateVisitTitle(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Title cannot be empty';
+    }
+    if(value.length<3){
+      return 'Title is too short';
+    }
+    return null;
+  }
 }

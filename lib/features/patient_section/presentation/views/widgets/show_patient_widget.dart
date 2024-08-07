@@ -61,8 +61,7 @@ class ShowPatientWidget extends StatelessWidget {
              text: patient.dateBirth== null? "Not available":"${DateTime.now().year - patient.dateBirth!.year} years old",),
            PatientInfoWidget(iconData: Icons.phone,text: patient.phone.isEmpty? "Not available":patient.phone ,),
            PatientInfoWidget(iconData: Icons.calendar_month,
-             text: patient.lastVisit== null? "Not available":"${patient.lastVisit!.day}/${patient.lastVisit!.month}/${patient.lastVisit!.year}",),
-           PatientInfoWidget(iconData: Icons.next_week_outlined,text: "next visit: cleaning and shaping of lower right six",),
+             text: patient.lastVisit== null? "Last Visit: No visits yet":"Last Visit: ${patient.lastVisit!.day}/${patient.lastVisit!.month}/${patient.lastVisit!.year}",),
         ],
       ),
     );

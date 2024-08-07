@@ -80,7 +80,7 @@ class PersonalInfoTab extends StatelessWidget {
                 onTap: ()async{
                   cubit.birth = await showDatePicker(
                   context: context,
-                  firstDate: DateTime(1900),
+                  firstDate: DateTime(DateTime.now().year-200),
                   lastDate: DateTime.now());
                   if (cubit.birth != null) {
                   cubit.birthDateTime.text =

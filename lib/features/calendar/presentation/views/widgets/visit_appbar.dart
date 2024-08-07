@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class VisitAppbar extends StatelessWidget {
-  const VisitAppbar({super.key});
+  final String title;
+  const VisitAppbar({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class VisitAppbar extends StatelessWidget {
             ),
             SizedBox(width: width*0.01,),
             Text(
-                "Add New Visit",
+                title,
                 style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.w600,

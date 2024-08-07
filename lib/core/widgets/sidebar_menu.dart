@@ -1,6 +1,8 @@
 import 'package:dentister/core/utils/app_assets.dart';
 import 'package:dentister/core/utils/app_router.dart';
+import 'package:dentister/features/patient_section/presentation/manager/patient_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class SidebarMenu extends StatelessWidget {
@@ -30,7 +32,10 @@ class SidebarMenu extends StatelessWidget {
                 ),
               ),
               InkWell(
-                onTap: (){context.push(AppRouter.kAddPatientScreen);},
+                onTap: (){
+                  BlocProvider.of<PatientCubit>(context).clearParameters();
+                  context.push(AppRouter.kAddPatientScreen);
+                  },
                 child: const ListTile(
                   leading: Icon(Icons.person_add),
                   title: Text("Add New Patient"),

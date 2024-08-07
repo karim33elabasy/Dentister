@@ -4,7 +4,6 @@ import 'package:dentister/features/patient_section/data/repos/patient_repo_imple
 import 'package:dentister/features/patient_section/presentation/manager/patient_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 class PatientCubit extends Cubit<PatientStates> {
   final PatientRepoImplem patientRepoImplem;
@@ -30,15 +29,15 @@ class PatientCubit extends Cubit<PatientStates> {
   DateTime? lastVisit;
   TextEditingController labTests = TextEditingController();
 
-  late GlobalKey<FormState> personalInfoFormKey= GlobalKey<FormState>();
-  late GlobalKey<FormState> contactInfoFormKey= GlobalKey<FormState>();
+  GlobalKey<FormState> personalInfoFormKey= GlobalKey<FormState>();
+  GlobalKey<FormState> contactInfoFormKey= GlobalKey<FormState>();
 
   setColor(Color selectedColor){
     color = selectedColor;
     emit(PatientStateInitial());
   }
   /// Clears all the parameters to reset the form fields and data
-  void _clearParameters() {
+  void clearParameters() {
     id.clear();
     _currentPatient = true;
     name.clear();
@@ -65,17 +64,17 @@ class PatientCubit extends Cubit<PatientStates> {
     name.text=patient.name;
     gender=patient.gender;
     birth=patient.dateBirth;
-    phone.text=patient.phone??"";
-    email.text=patient.email??"";
-    address.text=patient.address??"";
-    notes.text=patient.notes??"";
-    dentalHistory.text=patient.dentalHistory??"";
-    medicalHistory.text=patient.medicalHistory??"";
-    familyHistory.text=patient.familyHistory??"";
-    allergies.text=patient.allergies??"";
-    dentalNotes.text=patient.dentalNotes??"";
+    phone.text=patient.phone;
+    email.text=patient.email;
+    address.text=patient.address;
+    notes.text=patient.notes;
+    dentalHistory.text=patient.dentalHistory;
+    medicalHistory.text=patient.medicalHistory;
+    familyHistory.text=patient.familyHistory;
+    allergies.text=patient.allergies;
+    dentalNotes.text=patient.dentalNotes;
     lastVisit=patient.lastVisit;
-    labTests.text=patient.labTest??"";
+    labTests.text=patient.labTest;
   }
 
   /// Creates a [PatientModel] from the current form data
@@ -118,18 +117,20 @@ class PatientCubit extends Cubit<PatientStates> {
       (id) {emit(PatientStateSuccessInt(id: id,isEditing: false));
     });
     // Clear parameters after successful patient addition
-    _clearParameters();
+    clearParameters();
   }
 
 
-  editPatient()async {
+  editPatient({int? patientId,PatientModel? patient})async {
     emit(PatientStateLoading());
-    var result = await patientRepoImplem.editPatient(int.parse(id.text), _makePatient());
+    patientId??= int.parse(id.text);
+    patient??= _makePatient();
+    var result = await patientRepoImplem.editPatient(patientId, patient);
     result.fold(
       (error) {emit(PatientStateFailed(error: error.errMsg));},
       (id) {emit(PatientStateSuccessInt(id: id,isEditing: true));
     });
-    _clearParameters();
+    clearParameters();
   }
 
   deletePatient(int patientId) {

@@ -1,4 +1,5 @@
 import 'package:dentister/core/utils/app_router.dart';
+import 'package:dentister/features/patient_section/presentation/manager/patient_cubit.dart';
 import 'package:dentister/features/patient_section/presentation/manager/show_patients_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +10,7 @@ class ShowPatientsAppbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ShowPatientsCubit cubit = BlocProvider.of<ShowPatientsCubit>(context);
+    ShowPatientsCubit showCubit = BlocProvider.of<ShowPatientsCubit>(context);
     double width = MediaQuery.sizeOf(context).width;
     double height = MediaQuery.sizeOf(context).height;
     return Container(
@@ -28,7 +29,7 @@ class ShowPatientsAppbar extends StatelessWidget {
             SizedBox(width: width*0.02,),
             Expanded(
               child: TextFormField(
-                controller: cubit.searchPatients,
+                controller: showCubit.searchPatients,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15)
@@ -37,19 +38,20 @@ class ShowPatientsAppbar extends StatelessWidget {
                   suffixIcon: IconButton(
                     icon: const Icon(Icons.cancel_outlined),
                     onPressed: (){
-                      cubit.searchPatients.text = "";
-                      cubit.getPatients();
+                      showCubit.searchPatients.text = "";
+                      showCubit.getPatients();
                     },
                   )
                 ),
                 onChanged: (query){
-                  cubit.getPatients();
+                  showCubit.getPatients();
                 },
               ),
             ),
             SizedBox(width: width*0.02,),
             IconButton(
                 onPressed: (){
+                  BlocProvider.of<PatientCubit>(context).clearParameters();
                   context.push(AppRouter.kAddPatientScreen);
                 },
                 icon: Icon(Icons.person_add_alt_1_rounded,size: width*0.06,)

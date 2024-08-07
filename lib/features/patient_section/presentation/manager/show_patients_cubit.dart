@@ -1,4 +1,5 @@
 import 'package:dentister/features/patient_section/presentation/manager/show_patients_states.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,7 +13,6 @@ class ShowPatientsCubit extends Cubit<ShowPatientsStates>{
 
   getPatients()async{
     emit(ShowPatientStateLoading());
-    Future.delayed(const Duration(seconds: 2));
     var result = await patientRepoImplem.getPatients(searchPatients.text);
     result.fold(
             (error){emit(ShowPatientStateFailed(error: error.errMsg));},

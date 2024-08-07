@@ -1,3 +1,4 @@
+import 'package:dentister/core/main_data/cubit/main_cubit.dart';
 import 'package:dentister/core/utils/app_colors.dart';
 import 'package:dentister/core/utils/validation.dart';
 import 'package:dentister/features/patient_section/presentation/manager/show_patients_cubit.dart';
@@ -11,7 +12,8 @@ class SavePatientButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     PatientCubit cubit = BlocProvider.of<PatientCubit>(context);
-    ShowPatientsCubit showCubit = BlocProvider.of<ShowPatientsCubit>(context);
+    MainCubit mainCubit = BlocProvider.of<MainCubit>(context);
+    ShowPatientsCubit showPatients = BlocProvider.of<ShowPatientsCubit>(context);
     return FloatingActionButton(
       onPressed: () {
         TabController? tabController = DefaultTabController.of(context);
@@ -26,7 +28,8 @@ class SavePatientButton extends StatelessWidget {
             else{
               // Execute the button Code you want :
               cubit.addNewPatient();
-              showCubit.getPatients();
+              mainCubit.getDbData();
+              showPatients.getPatients();
             }
           } else {
             tabController.animateTo(tabController.index + 1);

@@ -5,7 +5,6 @@ import 'package:dentister/features/patient_section/presentation/manager/patient_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:image_picker/image_picker.dart';
 
 class PatientAvatarAddScreen extends StatelessWidget {
   const PatientAvatarAddScreen({super.key});
